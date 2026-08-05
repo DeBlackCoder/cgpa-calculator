@@ -31,7 +31,7 @@ async function getAnalytics() {
   const studentsWithCGPA = students.map(student => {
     const studentResultsList = studentResults.get(student._id.toString()) || []
     const cgpa = studentResultsList.length > 0
-      ? calculateGPA(studentResultsList.map(r => ({
+      ? calculateGPA(studentResultsList.map((r: any) => ({
           gradePoint: r.gradePoint,
           creditUnits: r.creditUnits
         })))

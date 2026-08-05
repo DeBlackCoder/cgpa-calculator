@@ -1,7 +1,7 @@
-import mongoose, { Schema, Document, Model } from 'mongoose'
+import mongoose, { Schema, Document, Model, Types } from 'mongoose'
 
 export interface IResult extends Document {
-  _id: string
+  _id: Types.ObjectId
   studentId: string
   courseId: string
   sessionId: string

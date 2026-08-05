@@ -1,7 +1,7 @@
-import mongoose, { Schema, Document, Model } from 'mongoose'
+import mongoose, { Schema, Document, Model, Types } from 'mongoose'
 
 export interface IProgramme extends Document {
-  _id: string
+  _id: Types.ObjectId
   name: string
   code: string
   description?: string

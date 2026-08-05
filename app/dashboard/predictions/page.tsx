@@ -36,13 +36,13 @@ async function getStudentPredictions(userId: string) {
   })
 
   const semesterGPAs = Array.from(semesterMap.values()).map(semResults =>
-    calculateGPA(semResults.map(r => ({
+    calculateGPA(semResults.map((r: any) => ({
       gradePoint: r.gradePoint,
       creditUnits: r.creditUnits
     })))
   )
 
-  const currentCGPA = calculateGPA(results.map(r => ({
+  const currentCGPA = calculateGPA(results.map((r: any) => ({
     gradePoint: r.gradePoint,
     creditUnits: r.creditUnits
   })))
