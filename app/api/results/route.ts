@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
       semester: validatedData.semester,
       level: validatedData.level,
       score: validatedData.score,
-      grade,
+      grade: grade as 'A' | 'B' | 'C' | 'D' | 'E' | 'F',
       gradePoint,
       creditUnits: course.creditUnits,
       qualityPoints

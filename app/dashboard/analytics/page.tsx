@@ -46,6 +46,7 @@ async function getAnalyticsData(userId: string) {
 
   const resultsWithCourses: ResultWithCourse[] = results.map((result) => ({
     ...result,
+    _id: result._id.toString(),
     course: courseMap.get(result.courseId?.toString()) ?? null
   }))
 
