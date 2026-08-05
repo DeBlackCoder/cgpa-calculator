@@ -1,0 +1,23 @@
+// Export all Mongoose models
+export { default as User } from './User'
+export { default as Student } from './Student'
+export { default as Admin } from './Admin'
+export { default as Faculty } from './Faculty'
+export { default as Department } from './Department'
+export { default as Programme } from './Programme'
+export { default as Course } from './Course'
+export { default as Result } from './Result'
+export { default as AcademicSession } from './AcademicSession'
+export { default as ChatHistory } from './ChatHistory'
+
+// Export types
+export type { IUser } from './User'
+export type { IStudent } from './Student'
+export type { IAdmin } from './Admin'
+export type { IFaculty } from './Faculty'
+export type { IDepartment } from './Department'
+export type { IProgramme } from './Programme'
+export type { ICourse } from './Course'
+export type { IResult } from './Result'
+export type { IAcademicSession } from './AcademicSession'
+export type { IChatHistory } from './ChatHistory'
