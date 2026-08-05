@@ -33,9 +33,7 @@ const FacultySchema = new Schema<IFaculty>(
   }
 )
 
-// Indexes
-FacultySchema.index({ name: 1 })
-FacultySchema.index({ code: 1 })
+// Indexes (name and code already have unique: true)
 
 const Faculty: Model<IFaculty> = mongoose.models.Faculty || mongoose.model<IFaculty>('Faculty', FacultySchema)
 

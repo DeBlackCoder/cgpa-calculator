@@ -39,7 +39,6 @@ const DepartmentSchema = new Schema<IDepartment>(
 )
 
 // Indexes
-DepartmentSchema.index({ code: 1 })
 DepartmentSchema.index({ facultyId: 1 })
 
 const Department: Model<IDepartment> = mongoose.models.Department || mongoose.model<IDepartment>('Department', DepartmentSchema)

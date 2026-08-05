@@ -54,7 +54,6 @@ const UserSchema = new Schema<IUser>(
 )
 
 // Indexes
-UserSchema.index({ email: 1 })
 UserSchema.index({ role: 1 })
 
 const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema)

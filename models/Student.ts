@@ -84,8 +84,6 @@ const StudentSchema = new Schema<IStudent>(
 )
 
 // Indexes
-StudentSchema.index({ userId: 1 })
-StudentSchema.index({ matricNumber: 1 })
 StudentSchema.index({ level: 1 })
 StudentSchema.index({ facultyId: 1 })
 StudentSchema.index({ departmentId: 1 })

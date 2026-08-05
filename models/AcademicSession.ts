@@ -37,7 +37,6 @@ const AcademicSessionSchema = new Schema<IAcademicSession>(
 )
 
 // Indexes
-AcademicSessionSchema.index({ name: 1 })
 AcademicSessionSchema.index({ isCurrent: 1 })
 
 const AcademicSession: Model<IAcademicSession> = mongoose.models.AcademicSession || mongoose.model<IAcademicSession>('AcademicSession', AcademicSessionSchema)

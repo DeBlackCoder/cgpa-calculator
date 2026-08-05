@@ -51,7 +51,6 @@ const ProgrammeSchema = new Schema<IProgramme>(
 )
 
 // Indexes
-ProgrammeSchema.index({ code: 1 })
 ProgrammeSchema.index({ departmentId: 1 })
 
 const Programme: Model<IProgramme> = mongoose.models.Programme || mongoose.model<IProgramme>('Programme', ProgrammeSchema)

@@ -26,8 +26,7 @@ const AdminSchema = new Schema<IAdmin>(
   }
 )
 
-// Indexes
-AdminSchema.index({ userId: 1 })
+// Indexes (userId already has unique: true)
 
 const Admin: Model<IAdmin> = mongoose.models.Admin || mongoose.model<IAdmin>('Admin', AdminSchema)
 
