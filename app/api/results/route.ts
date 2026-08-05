@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
 
     // Check if result already exists
     const existingResult = await Result.findOne({
-      studentId: student._id,
+      studentId: student._id.toString(),
       courseId: validatedData.courseId,
       sessionId: validatedData.sessionId,
       semester: validatedData.semester
@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
 
     // Create result
     const result = await Result.create({
-      studentId: student._id,
+      studentId: student._id.toString(),
       courseId: validatedData.courseId,
       sessionId: validatedData.sessionId,
       semester: validatedData.semester,

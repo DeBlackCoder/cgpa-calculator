@@ -19,8 +19,8 @@ async function getUsers() {
   // Get admin and student info for each user
   const usersWithRoles = await Promise.all(
     users.map(async (user) => {
-      const admin = await Admin.findOne({ userId: user._id }).lean()
-      const student = await Student.findOne({ userId: user._id }).lean()
+      const admin = await Admin.findOne({ userId: user._id.toString() }).lean()
+      const student = await Student.findOne({ userId: user._id.toString() }).lean()
       return {
         ...user,
         admin,

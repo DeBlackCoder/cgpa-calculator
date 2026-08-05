@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     // Create admin profile if role is ADMIN
     if (validatedData.role === "ADMIN") {
       await Admin.create({
-        userId: user._id,
+        userId: user._id.toString(),
         isSuperAdmin: validatedData.isSuperAdmin || false
       })
     }
@@ -144,7 +144,7 @@ export async function GET(request: NextRequest) {
     const usersWithAdmin = await Promise.all(
       users.map(async (user) => {
         if (user.role === 'ADMIN') {
-          const admin = await Admin.findOne({ userId: user._id }).select('isSuperAdmin').lean()
+          const admin = await Admin.findOne({ userId: user._id.toString() }).select('isSuperAdmin').lean()
           return {
             ...user,
             admin: admin ? { isSuperAdmin: admin.isSuperAdmin } : null
