@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select } from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { ArrowLeft, Shield, User } from "lucide-react"
@@ -124,17 +124,21 @@ export default function CreateUserPage() {
             <div className="space-y-2">
               <Label htmlFor="role">User Role</Label>
               <Select
-                id="role"
                 value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                onValueChange={(value) => setFormData({ ...formData, role: value })}
                 disabled={isLoading}
               >
-                <option value="STUDENT">
-                  👨‍🎓 Student - Can manage their academic records
-                </option>
-                <option value="ADMIN">
-                  👨‍💼 Administrator - Can manage system and students
-                </option>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="STUDENT">
+                    👨‍🎓 Student - Can manage their academic records
+                  </SelectItem>
+                  <SelectItem value="ADMIN">
+                    👨‍💼 Administrator - Can manage system and students
+                  </SelectItem>
+                </SelectContent>
               </Select>
             </div>
 
