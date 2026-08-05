@@ -32,16 +32,16 @@ export async function GET(
   }
 }
 
-// PUT /api/faculties/[id] - Update faculty (SUPER ADMIN ONLY)
+// PUT /api/faculties/[id] - Update faculty (Senior Admin or above)
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const superAdmin = await isSuperAdmin()
-    if (!superAdmin) {
+    const canModify = await canModifyAcademicData()
+    if (!canModify) {
       return new Response(
-        JSON.stringify({ error: "Only super admins can modify faculties" }),
+        JSON.stringify({ error: "Only senior admins or above can modify faculties" }),
         { status: 403 }
       )
     }
@@ -93,16 +93,16 @@ export async function PUT(
   }
 }
 
-// DELETE /api/faculties/[id] - Delete faculty (SUPER ADMIN ONLY)
+// DELETE /api/faculties/[id] - Delete faculty (Senior Admin or above)
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const superAdmin = await isSuperAdmin()
-    if (!superAdmin) {
+    const canModify = await canModifyAcademicData()
+    if (!canModify) {
       return new Response(
-        JSON.stringify({ error: "Only super admins can delete faculties" }),
+        JSON.stringify({ error: "Only senior admins or above can delete faculties" }),
         { status: 403 }
       )
     }

@@ -32,16 +32,16 @@ export async function GET(
   }
 }
 
-// PUT /api/departments/[id] - Update department (SUPER ADMIN ONLY)
+// PUT /api/departments/[id] - Update department (Senior Admin or above)
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const superAdmin = await isSuperAdmin()
-    if (!superAdmin) {
+    const canModify = await canModifyAcademicData()
+    if (!canModify) {
       return new Response(
-        JSON.stringify({ error: "Only super admins can modify departments" }),
+        JSON.stringify({ error: "Only senior admins or above can modify departments" }),
         { status: 403 }
       )
     }
