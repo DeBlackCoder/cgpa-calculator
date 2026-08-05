@@ -144,7 +144,7 @@ export default function ProfileSetupPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {faculties.map((faculty) => (
-                    <SelectItem key={faculty._id} value={faculty._id}>
+                    <SelectItem key={faculty._id.toString()} value={faculty._id}>
                       {faculty.name}
                     </SelectItem>
                   ))}
@@ -164,7 +164,7 @@ export default function ProfileSetupPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {departments.map((dept) => (
-                    <SelectItem key={dept._id} value={dept._id}>
+                    <SelectItem key={dept._id.toString()} value={dept._id}>
                       {dept.name}
                     </SelectItem>
                   ))}
@@ -184,7 +184,7 @@ export default function ProfileSetupPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {programmes.map((prog) => (
-                    <SelectItem key={prog._id} value={prog._id}>
+                    <SelectItem key={prog._id.toString()} value={prog._id}>
                       {prog.name}
                     </SelectItem>
                   ))}

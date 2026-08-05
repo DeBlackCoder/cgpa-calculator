@@ -88,7 +88,7 @@ export default async function UsersManagementPage() {
           <div className="space-y-3">
             {users.map((user: any) => (
               <div
-                key={user._id}
+                key={user._id.toString()}
                 className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800"
               >
                 <div className="flex items-center gap-4">

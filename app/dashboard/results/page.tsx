@@ -170,7 +170,7 @@ export default async function ResultsPage() {
                 <div className="space-y-3">
                   {semester.results.map((result: any) => (
                     <div
-                      key={result._id}
+                      key={result._id.toString()}
                       className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
                     >
                       <div className="flex-1">

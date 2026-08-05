@@ -180,7 +180,7 @@ export default async function AdminDashboardPage() {
               ) : (
                 stats.topPerformers.map(({ student, user, department, cgpa }, index) => (
                   <div
-                    key={student._id}
+                    key={student._id.toString()}
                     className="flex items-center justify-between p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900"
                   >
                     <div className="flex items-center gap-3">
@@ -239,7 +239,7 @@ export default async function AdminDashboardPage() {
             <div className="space-y-3">
               {stats.recentResults.map((result: any) => (
                 <div
-                  key={result._id}
+                  key={result._id.toString()}
                   className="flex items-center justify-between p-3 rounded-lg border border-zinc-200 dark:border-zinc-800"
                 >
                   <div>

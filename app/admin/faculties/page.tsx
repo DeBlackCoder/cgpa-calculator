@@ -281,7 +281,7 @@ export default function FacultiesPage() {
       {/* Faculties List */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {faculties.map((faculty) => (
-          <Card key={faculty._id}>
+          <Card key={faculty._id.toString()}>
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">

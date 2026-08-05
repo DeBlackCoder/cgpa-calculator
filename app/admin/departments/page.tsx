@@ -359,7 +359,7 @@ export default function DepartmentsPage() {
                   </SelectTrigger>
                   <SelectContent>
                     {faculties.map((faculty) => (
-                      <SelectItem key={faculty._id} value={faculty._id}>
+                      <SelectItem key={faculty._id.toString()} value={faculty._id}>
                         {faculty.name} ({faculty.code})
                       </SelectItem>
                     ))}
@@ -392,7 +392,7 @@ export default function DepartmentsPage() {
       {/* Departments List - Grouped by Faculty */}
       {departmentsByFaculty.map(({ faculty, departments }) => (
         departments.length > 0 && (
-          <div key={faculty._id} className="space-y-4">
+          <div key={faculty._id.toString()} className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/20">
                 <Building2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -407,7 +407,7 @@ export default function DepartmentsPage() {
             
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {departments.map((department) => (
-                <Card key={department._id}>
+                <Card key={department._id.toString()}>
                   <CardHeader>
                     <CardTitle className="text-lg">{department.name}</CardTitle>
                     <code className="text-xs bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded inline-block w-fit">
@@ -436,7 +436,7 @@ export default function DepartmentsPage() {
                         </SelectTrigger>
                         <SelectContent>
                           {faculties.map((fac) => (
-                            <SelectItem key={fac._id} value={fac._id}>
+                            <SelectItem key={fac._id.toString()} value={fac._id}>
                               {fac.name} ({fac.code})
                             </SelectItem>
                           ))}

@@ -208,7 +208,7 @@ export default function AddResultPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {sessions.map((session) => (
-                    <SelectItem key={session._id} value={session._id}>
+                    <SelectItem key={session._id.toString()} value={session._id}>
                       {session.name} {session.isCurrent && "(Current)"}
                     </SelectItem>
                   ))}
@@ -232,7 +232,7 @@ export default function AddResultPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {courses.map((course) => (
-                    <SelectItem key={course._id} value={course._id}>
+                    <SelectItem key={course._id.toString()} value={course._id}>
                       {course.code} - {course.title} ({course.creditUnits} units)
                     </SelectItem>
                   ))}

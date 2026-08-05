@@ -342,7 +342,7 @@ export default function ProgrammesPage() {
                   </SelectTrigger>
                   <SelectContent>
                     {departments.map((dept) => (
-                      <SelectItem key={dept._id} value={dept._id}>
+                      <SelectItem key={dept._id.toString()} value={dept._id}>
                         {dept.name} ({dept.code})
                       </SelectItem>
                     ))}
@@ -410,7 +410,7 @@ export default function ProgrammesPage() {
       {/* Programmes List - Grouped by Department */}
       {programmesByDepartment.map(({ department, programmes: deptProgs }) => (
         deptProgs.length > 0 && (
-          <div key={department._id} className="space-y-4">
+          <div key={department._id.toString()} className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/20">
                 <GraduationCap className="h-5 w-5 text-green-600 dark:text-green-400" />
@@ -425,7 +425,7 @@ export default function ProgrammesPage() {
             
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {deptProgs.map((programme) => (
-                <Card key={programme._id}>
+                <Card key={programme._id.toString()}>
                   <CardHeader>
                     <CardTitle className="text-lg">{programme.name}</CardTitle>
                     <code className="text-xs bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded inline-block w-fit">

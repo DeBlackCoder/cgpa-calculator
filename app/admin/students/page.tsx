@@ -120,7 +120,7 @@ export default async function StudentsPage() {
                 <tbody>
                   {students.map((student: any) => (
                     <tr
-                      key={student._id}
+                      key={student._id.toString()}
                       className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                     >
                       <td className="py-3 px-4">

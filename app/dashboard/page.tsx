@@ -342,7 +342,7 @@ export default async function DashboardPage() {
             <div className="space-y-3">
               {recentResults.map((result) => (
                 <div
-                  key={result._id}
+                  key={result._id.toString()}
                   className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800"
                 >
                   <div className="flex-1">

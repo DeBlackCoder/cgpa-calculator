@@ -400,7 +400,7 @@ export default function CoursesPage() {
                   </SelectTrigger>
                   <SelectContent>
                     {departments.map((dept) => (
-                      <SelectItem key={dept._id} value={dept._id}>
+                      <SelectItem key={dept._id.toString()} value={dept._id}>
                         {dept.name} ({dept.code})
                       </SelectItem>
                     ))}
@@ -448,7 +448,7 @@ export default function CoursesPage() {
             
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {levelCourses.map((course) => (
-                <Card key={course._id}>
+                <Card key={course._id.toString()}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
