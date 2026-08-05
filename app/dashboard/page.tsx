@@ -346,9 +346,9 @@ export default async function DashboardPage() {
                   className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800"
                 >
                   <div className="flex-1">
-                    <h4 className="font-medium">{result.course.title}</h4>
+                    <h4 className="font-medium">{result.course?.title ?? 'Unknown Course'}</h4>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      {result.course.code} • {result.creditUnits} Units
+                      {result.course?.code ?? 'N/A'} • {result.creditUnits} Units
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
