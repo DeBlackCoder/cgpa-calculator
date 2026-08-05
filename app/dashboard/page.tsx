@@ -238,7 +238,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl sm:text-3xl font-bold">{student.creditsEarned}</div>
-            <p className="text-xs text-zinc-500 mt-1 truncate">of {student.programme.totalCredits} required</p>
+            <p className="text-xs text-zinc-500 mt-1 truncate">of {student.programme?.totalCredits ?? 0} required</p>
           </CardContent>
         </Card>
 
@@ -252,7 +252,7 @@ export default async function DashboardPage() {
               {student.targetCGPA ? student.targetCGPA.toFixed(2) : "N/A"}
             </div>
             <p className="text-xs text-zinc-500 mt-1 truncate">
-              {student.targetCGPA && cgpa >= student.targetCGPA ? "Target achieved!" : "Keep pushing!"}
+              {student.targetCGPA && cgpa && cgpa >= student.targetCGPA ? "Target achieved!" : "Keep pushing!"}
             </p>
           </CardContent>
         </Card>
@@ -271,11 +271,11 @@ export default async function DashboardPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-zinc-600 dark:text-zinc-400">Programme</span>
-              <span className="text-sm font-medium">{student.programme.name}</span>
+              <span className="text-sm font-medium">{student.programme?.name ?? 'N/A'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-zinc-600 dark:text-zinc-400">Department</span>
-              <span className="text-sm font-medium">{student.department.name}</span>
+              <span className="text-sm font-medium">{student.department?.name ?? 'N/A'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-zinc-600 dark:text-zinc-400">Level</span>
