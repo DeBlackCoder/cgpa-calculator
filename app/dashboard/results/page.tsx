@@ -19,7 +19,7 @@ async function getResults(userId: string) {
   }
 
   // Fetch results for this student
-  const results = await Result.find({ studentId: student._id })
+  const results = await Result.find({ studentId: student._id.toString() })
     .sort({ level: -1, semester: -1, createdAt: -1 })
     .lean()
 
