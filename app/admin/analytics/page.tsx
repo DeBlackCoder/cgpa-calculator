@@ -114,7 +114,7 @@ export default async function AdminAnalyticsPage() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold mb-2">System Analytics</h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-gray-600">
           Comprehensive analysis of academic performance
         </p>
       </div>
@@ -128,7 +128,7 @@ export default async function AdminAnalyticsPage() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{analytics.overallStats.totalStudents}</div>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               {analytics.overallStats.studentsWithResults} with results
             </p>
           </CardContent>
@@ -143,7 +143,7 @@ export default async function AdminAnalyticsPage() {
             <div className="text-3xl font-bold">
               {analytics.overallStats.avgCGPA.toFixed(2)}
             </div>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               {getClassOfDegree(analytics.overallStats.avgCGPA)}
             </p>
           </CardContent>
@@ -158,7 +158,7 @@ export default async function AdminAnalyticsPage() {
             <div className="text-3xl font-bold">
               {analytics.overallStats.passRate.toFixed(1)}%
             </div>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               Across {analytics.overallStats.totalResults} results
             </p>
           </CardContent>
@@ -173,7 +173,7 @@ export default async function AdminAnalyticsPage() {
             <div className="text-3xl font-bold text-red-600">
               {analytics.overallStats.studentsOnProbation}
             </div>
-            <p className="text-xs text-zinc-500 mt-1">CGPA below 2.0</p>
+            <p className="text-xs text-gray-500 mt-1">CGPA below 2.0</p>
           </CardContent>
         </Card>
       </div>
@@ -276,8 +276,8 @@ export default async function AdminAnalyticsPage() {
 
               <div>
                 <div className="flex justify-between mb-1">
-                  <span className="text-sm text-zinc-500">No Results Yet</span>
-                  <span className="text-sm font-semibold text-zinc-500">
+                  <span className="text-sm text-gray-500">No Results Yet</span>
+                  <span className="text-sm font-semibold text-gray-500">
                     {analytics.cgpaDistribution.noResults}
                   </span>
                 </div>
@@ -342,7 +342,7 @@ export default async function AdminAnalyticsPage() {
             {analytics.departmentStats.map((dept, index) => (
               <div
                 key={dept.code}
-                className="flex items-center justify-between p-4 rounded-lg bg-zinc-50 dark:bg-zinc-900"
+                className="flex items-center justify-between p-4 rounded-lg bg-gray-50"
               >
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
@@ -350,21 +350,21 @@ export default async function AdminAnalyticsPage() {
                   </div>
                   <div>
                     <p className="font-medium">{dept.name}</p>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm text-gray-600">
                       {dept.studentCount} students • {dept.code}
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold">{dept.avgCGPA.toFixed(2)}</p>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                  <p className="text-xs text-gray-600">
                     Avg CGPA
                   </p>
                 </div>
               </div>
             ))}
             {analytics.departmentStats.length === 0 && (
-              <p className="text-center text-zinc-500 py-8">
+              <p className="text-center text-gray-500 py-8">
                 No department data available
               </p>
             )}

@@ -262,23 +262,23 @@ export default function AddResultPage() {
 
             {/* Preview */}
             {selectedCourse && previewGrade && (
-              <div className="p-4 bg-zinc-50 dark:bg-zinc-900 rounded-lg space-y-2">
+              <div className="p-4 bg-gray-50 rounded-lg space-y-2">
                 <h4 className="font-medium text-sm">Preview</h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="text-zinc-600 dark:text-zinc-400">Course</p>
+                    <p className="text-gray-600">Course</p>
                     <p className="font-medium">{selectedCourse.title}</p>
                   </div>
                   <div>
-                    <p className="text-zinc-600 dark:text-zinc-400">Credit Units</p>
+                    <p className="text-gray-600">Credit Units</p>
                     <p className="font-medium">{selectedCourse.creditUnits}</p>
                   </div>
                   <div>
-                    <p className="text-zinc-600 dark:text-zinc-400">Score</p>
+                    <p className="text-gray-600">Score</p>
                     <p className="font-medium">{formData.score}%</p>
                   </div>
                   <div>
-                    <p className="text-zinc-600 dark:text-zinc-400">Grade</p>
+                    <p className="text-gray-600">Grade</p>
                     <p className="font-medium">{previewGrade}</p>
                   </div>
                 </div>

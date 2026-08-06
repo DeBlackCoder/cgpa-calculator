@@ -8,14 +8,17 @@ import {
   LayoutDashboard, 
   BookOpen, 
   BarChart3, 
-  MessageSquare, 
+  Brain,
+  Calculator,
   Settings, 
   Users,
   Building2,
   GraduationCap,
   LogOut,
   Menu,
-  X
+  X,
+  Calendar,
+  Target
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { signOut } from "next-auth/react"
@@ -31,46 +34,47 @@ export function Sidebar({ role, isSuperAdmin = false, isSeniorAdmin = false }: S
   const [isOpen, setIsOpen] = useState(false)
 
   const studentLinks = [
-    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, color: "from-indigo-500 to-purple-500" },
-    { href: "/dashboard/results", label: "My Results", icon: BookOpen, color: "from-purple-500 to-pink-500" },
-    { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3, color: "from-pink-500 to-orange-500" },
-    { href: "/dashboard/predictions", label: "AI Predictions", icon: MessageSquare, color: "from-orange-500 to-cyan-500" },
-    { href: "/dashboard/tools", label: "Tools", icon: Settings, color: "from-cyan-500 to-indigo-500" },
-    { href: "/dashboard/ai-advisor", label: "AI Advisor", icon: MessageSquare, color: "from-indigo-500 to-pink-500" },
-    { href: "/dashboard/profile", label: "Profile", icon: Users, color: "from-purple-500 to-orange-500" }
+    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/dashboard/results", label: "My Results", icon: BookOpen },
+    { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
+    { href: "/dashboard/predictions", label: "AI Predictions", icon: Target },
+    { href: "/dashboard/tools", label: "Tools", icon: Calculator },
+    { href: "/dashboard/ai-advisor", label: "AI Advisor", icon: Brain },
+    { href: "/dashboard/timetable", label: "Timetable", icon: Calendar },
+    { href: "/dashboard/profile", label: "Profile", icon: Users }
   ]
 
   // Regular admin links (view-only)
   const regularAdminLinks = [
-    { href: "/admin", label: "Dashboard", icon: LayoutDashboard, color: "from-indigo-500 to-purple-500" },
-    { href: "/admin/students", label: "Students", icon: Users, color: "from-purple-500 to-pink-500" },
-    { href: "/admin/analytics", label: "Analytics", icon: BarChart3, color: "from-pink-500 to-orange-500" }
+    { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/students", label: "Students", icon: Users },
+    { href: "/admin/analytics", label: "Analytics", icon: BarChart3 }
   ]
 
   // Senior admin links (can modify academic data)
   const seniorAdminLinks = [
-    { href: "/admin", label: "Dashboard", icon: LayoutDashboard, color: "from-indigo-500 to-purple-500" },
-    { href: "/admin/students", label: "Students", icon: Users, color: "from-purple-500 to-pink-500" },
-    { href: "/admin/faculties", label: "Faculties", icon: GraduationCap, color: "from-pink-500 to-orange-500" },
-    { href: "/admin/departments", label: "Departments", icon: Building2, color: "from-orange-500 to-cyan-500" },
-    { href: "/admin/programmes", label: "Programmes", icon: GraduationCap, color: "from-cyan-500 to-indigo-500" },
-    { href: "/admin/courses", label: "Courses", icon: BookOpen, color: "from-indigo-500 to-purple-500" },
-    { href: "/admin/analytics", label: "Analytics", icon: BarChart3, color: "from-purple-500 to-pink-500" },
-    { href: "/admin/settings", label: "Settings", icon: Settings, color: "from-pink-500 to-orange-500" }
+    { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/students", label: "Students", icon: Users },
+    { href: "/admin/faculties", label: "Faculties", icon: GraduationCap },
+    { href: "/admin/departments", label: "Departments", icon: Building2 },
+    { href: "/admin/programmes", label: "Programmes", icon: GraduationCap },
+    { href: "/admin/courses", label: "Courses", icon: BookOpen },
+    { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
+    { href: "/admin/settings", label: "Settings", icon: Settings }
   ]
 
   // Super admin links (full access + can manage admin roles)
   const superAdminLinks = [
-    { href: "/admin", label: "Dashboard", icon: LayoutDashboard, color: "from-indigo-500 to-purple-500" },
-    { href: "/admin/students", label: "Students", icon: Users, color: "from-purple-500 to-pink-500" },
-    { href: "/admin/users", label: "User Management", icon: Settings, color: "from-pink-500 to-orange-500" },
-    { href: "/admin/admin-roles", label: "Admin Roles", icon: Users, color: "from-orange-500 to-cyan-500" },
-    { href: "/admin/faculties", label: "Faculties", icon: GraduationCap, color: "from-cyan-500 to-indigo-500" },
-    { href: "/admin/departments", label: "Departments", icon: Building2, color: "from-indigo-500 to-purple-500" },
-    { href: "/admin/programmes", label: "Programmes", icon: GraduationCap, color: "from-purple-500 to-pink-500" },
-    { href: "/admin/courses", label: "Courses", icon: BookOpen, color: "from-pink-500 to-orange-500" },
-    { href: "/admin/analytics", label: "Analytics", icon: BarChart3, color: "from-orange-500 to-cyan-500" },
-    { href: "/admin/settings", label: "Settings", icon: Settings, color: "from-cyan-500 to-indigo-500" }
+    { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/students", label: "Students", icon: Users },
+    { href: "/admin/users", label: "User Management", icon: Settings },
+    { href: "/admin/admin-roles", label: "Admin Roles", icon: Users },
+    { href: "/admin/faculties", label: "Faculties", icon: GraduationCap },
+    { href: "/admin/departments", label: "Departments", icon: Building2 },
+    { href: "/admin/programmes", label: "Programmes", icon: GraduationCap },
+    { href: "/admin/courses", label: "Courses", icon: BookOpen },
+    { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
+    { href: "/admin/settings", label: "Settings", icon: Settings }
   ]
 
   const links = role === "ADMIN" 
@@ -79,42 +83,44 @@ export function Sidebar({ role, isSuperAdmin = false, isSeniorAdmin = false }: S
 
   return (
     <>
-      {/* Mobile Menu Button - positioned to not overlap with header */}
+      {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
         aria-label="Toggle menu"
       >
         {isOpen ? (
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5 text-gray-700" />
         ) : (
-          <Menu className="h-5 w-5" />
+          <Menu className="h-5 w-5 text-gray-700" />
         )}
       </button>
 
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+          className="lg:hidden fixed inset-0 bg-black/20 z-40 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <div className={cn(
-        "flex flex-col h-full w-64 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 transition-transform duration-300 ease-in-out z-50",
-        // Mobile: slide in from left
+        "flex flex-col h-full w-64 border-r border-gray-200 bg-white transition-transform duration-300 ease-in-out z-50 relative overflow-hidden",
         "fixed lg:relative",
         isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
+        {/* Decorative gradient splash on left edge */}
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 via-purple-400 to-green-400" />
+        
         {/* Logo */}
-        <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-          <GraduationCap className="h-6 w-6 text-white flex-shrink-0" />
-          <span className="font-bold text-lg truncate text-white">CGPA AI</span>
+        <div className="h-16 flex items-center gap-3 px-6 border-b border-gray-200 bg-gradient-to-r from-blue-50/30 to-transparent">
+          <Calculator className="h-6 w-6 text-blue-600 flex-shrink-0" />
+          <span className="font-bold text-lg text-gray-900">CGPA AI</span>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {links.map((link) => {
             const Icon = link.icon
             const isActive = pathname === link.href || pathname.startsWith(link.href + "/")
@@ -125,42 +131,30 @@ export function Sidebar({ role, isSuperAdmin = false, isSeniorAdmin = false }: S
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium group relative overflow-hidden",
+                  "flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all text-sm font-medium relative overflow-hidden",
                   isActive
-                    ? `bg-gradient-to-r ${link.color} text-white shadow-lg shadow-${link.color.split('-')[1]}-500/50`
-                    : "text-zinc-600 dark:text-zinc-400 hover:bg-gradient-to-r hover:from-zinc-100 hover:to-zinc-50 dark:hover:from-zinc-800 dark:hover:to-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-100 hover:shadow-md"
+                    ? "bg-gradient-to-r from-blue-50 to-transparent text-blue-700 shadow-sm border-l-2 border-l-blue-500"
+                    : "text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-transparent hover:text-gray-900"
                 )}
               >
-                <div className={cn(
-                  "p-2 rounded-lg transition-colors",
-                  isActive 
-                    ? "bg-white/20" 
-                    : "bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700"
-                )}>
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                </div>
+                <Icon className="h-5 w-5 flex-shrink-0" />
                 <span>{link.label}</span>
-                {isActive && (
-                  <div className="ml-auto w-2 h-2 rounded-full bg-white animate-pulse" />
-                )}
               </Link>
             )
           })}
         </nav>
 
         {/* Logout */}
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
+        <div className="p-4 border-t border-gray-200 bg-gradient-to-r from-red-50/20 to-transparent">
           <Button
             variant="ghost"
-            className="w-full justify-start text-sm font-medium hover:bg-gradient-to-r hover:from-red-500 hover:to-pink-500 hover:text-white transition-all duration-300 group rounded-xl"
+            className="w-full justify-start text-sm font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 transition-colors rounded-lg"
             onClick={() => {
               setIsOpen(false)
               signOut({ callbackUrl: "/" })
             }}
           >
-            <div className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-white/20 transition-colors mr-2">
-              <LogOut className="h-4 w-4" />
-            </div>
+            <LogOut className="h-4 w-4 mr-3" />
             Sign Out
           </Button>
         </div>

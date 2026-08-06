@@ -252,7 +252,7 @@ export default function ProgrammesPage() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-6">
+            <p className="text-gray-600 text-center mb-6">
               Only super admins can manage programmes.
             </p>
             <Button onClick={() => router.push('/admin')}>
@@ -270,7 +270,7 @@ export default function ProgrammesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Programmes Management</h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm text-gray-600">
             Manage academic programmes across departments
           </p>
         </div>
@@ -285,8 +285,8 @@ export default function ProgrammesPage() {
       {departments.length === 0 && (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <GraduationCap className="h-12 w-12 text-zinc-400 mb-4" />
-            <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+            <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
+            <p className="text-gray-600 mb-4">
               No departments found. Please create departments first.
             </p>
             <Button onClick={() => window.location.href = '/admin/departments'}>
@@ -435,16 +435,16 @@ export default function ProgrammesPage() {
                   <CardContent className="space-y-3">
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div>
-                        <span className="text-zinc-600 dark:text-zinc-400">Duration:</span>
+                        <span className="text-gray-600">Duration:</span>
                         <p className="font-medium">{programme.duration} Years</p>
                       </div>
                       <div>
-                        <span className="text-zinc-600 dark:text-zinc-400">Credits:</span>
+                        <span className="text-gray-600">Credits:</span>
                         <p className="font-medium">{programme.totalCredits}</p>
                       </div>
                     </div>
                     {programme.description && (
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                      <p className="text-sm text-gray-600 line-clamp-2">
                         {programme.description}
                       </p>
                     )}
@@ -477,8 +477,8 @@ export default function ProgrammesPage() {
       {programmes.length === 0 && !isCreating && departments.length > 0 && (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <GraduationCap className="h-12 w-12 text-zinc-400 mb-4" />
-            <p className="text-zinc-600 dark:text-zinc-400 mb-4">No programmes found</p>
+            <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
+            <p className="text-gray-600 mb-4">No programmes found</p>
             <Button onClick={() => setIsCreating(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Add Your First Programme

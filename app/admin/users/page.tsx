@@ -54,7 +54,7 @@ export default async function UsersManagementPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold mb-2">User Management</h1>
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-gray-600">
             Manage system users and administrators
           </p>
         </div>
@@ -89,7 +89,7 @@ export default async function UsersManagementPage() {
             {users.map((user: any) => (
               <div
                 key={user._id.toString()}
-                className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800"
+                className="flex items-center justify-between p-4 rounded-lg border border-gray-200"
               >
                 <div className="flex items-center gap-4">
                   <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
@@ -105,7 +105,7 @@ export default async function UsersManagementPage() {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm text-gray-600">
                       {user.email}
                     </p>
                   </div>
@@ -121,7 +121,7 @@ export default async function UsersManagementPage() {
                     )}
                     {user.role}
                   </Badge>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-gray-500">
                     {new Date(user.createdAt).toLocaleDateString()}
                   </p>
                 </div>

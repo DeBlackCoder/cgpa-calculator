@@ -191,7 +191,7 @@ export default function FacultiesPage() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-6">
+            <p className="text-gray-600 text-center mb-6">
               Only super admins can manage faculties. This ensures site-wide settings are controlled by authorized personnel only.
             </p>
             <Button onClick={() => router.push('/admin')}>
@@ -209,7 +209,7 @@ export default function FacultiesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Faculties Management</h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm text-gray-600">
             Manage university faculties
           </p>
         </div>
@@ -299,7 +299,7 @@ export default function FacultiesPage() {
             </CardHeader>
             <CardContent>
               {faculty.description && (
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+                <p className="text-sm text-gray-600 mb-4">
                   {faculty.description}
                 </p>
               )}
@@ -329,8 +329,8 @@ export default function FacultiesPage() {
       {faculties.length === 0 && !isCreating && (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <GraduationCap className="h-12 w-12 text-zinc-400 mb-4" />
-            <p className="text-zinc-600 dark:text-zinc-400 mb-4">No faculties found</p>
+            <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
+            <p className="text-gray-600 mb-4">No faculties found</p>
             <Button onClick={() => setIsCreating(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Add Your First Faculty

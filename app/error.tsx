@@ -17,7 +17,7 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-fit p-3 bg-red-100 dark:bg-red-900/20 rounded-full mb-4">
@@ -26,7 +26,7 @@ export default function Error({
           <CardTitle className="text-2xl">Something went wrong!</CardTitle>
         </CardHeader>
         <CardContent className="text-center space-y-4">
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-gray-600">
             We encountered an error while processing your request.
           </p>
           {error.message && (

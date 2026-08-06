@@ -43,18 +43,18 @@ export default function PerformanceSummary({
             {bestCourses.map((result, index) => (
               <div
                 key={result.id}
-                className="flex items-center justify-between p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900"
+                className="flex items-center justify-between p-3 rounded-lg bg-gray-50"
               >
                 <div className="flex-1">
                   <p className="font-medium text-sm">{result.course.title}</p>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                  <p className="text-xs text-gray-600">
                     {result.course.code}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-right">
                     <p className="text-sm font-medium">{result.score.toFixed(1)}%</p>
-                    <p className="text-xs text-zinc-500">{result.gradePoint.toFixed(1)} GP</p>
+                    <p className="text-xs text-gray-500">{result.gradePoint.toFixed(1)} GP</p>
                   </div>
                   <Badge variant="success">{result.grade}</Badge>
                 </div>
@@ -78,18 +78,18 @@ export default function PerformanceSummary({
             {worstCourses.map((result, index) => (
               <div
                 key={result.id}
-                className="flex items-center justify-between p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900"
+                className="flex items-center justify-between p-3 rounded-lg bg-gray-50"
               >
                 <div className="flex-1">
                   <p className="font-medium text-sm">{result.course.title}</p>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                  <p className="text-xs text-gray-600">
                     {result.course.code}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-right">
                     <p className="text-sm font-medium">{result.score.toFixed(1)}%</p>
-                    <p className="text-xs text-zinc-500">{result.gradePoint.toFixed(1)} GP</p>
+                    <p className="text-xs text-gray-500">{result.gradePoint.toFixed(1)} GP</p>
                   </div>
                   <Badge
                     variant={result.grade === "F" ? "destructive" : "warning"}
@@ -118,15 +118,15 @@ export default function PerformanceSummary({
           <CardContent>
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Current CGPA</p>
+                <p className="text-sm text-gray-600 mb-1">Current CGPA</p>
                 <p className="text-2xl font-bold">{cgpa.toFixed(2)}</p>
               </div>
               <div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Target CGPA</p>
+                <p className="text-sm text-gray-600 mb-1">Target CGPA</p>
                 <p className="text-2xl font-bold">{targetCGPA.toFixed(2)}</p>
               </div>
               <div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Required GPA</p>
+                <p className="text-sm text-gray-600 mb-1">Required GPA</p>
                 <p className={`text-2xl font-bold ${
                   requiredGPA && requiredGPA > 5 
                     ? "text-red-600" 

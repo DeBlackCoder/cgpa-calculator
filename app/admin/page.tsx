@@ -110,7 +110,7 @@ export default async function AdminDashboardPage() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-gray-600">
           Overview of the academic management system
         </p>
       </div>
@@ -124,7 +124,7 @@ export default async function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.totalStudents}</div>
-            <p className="text-xs text-zinc-500 mt-1">Registered students</p>
+            <p className="text-xs text-gray-500 mt-1">Registered students</p>
           </CardContent>
         </Card>
 
@@ -135,7 +135,7 @@ export default async function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.totalDepartments}</div>
-            <p className="text-xs text-zinc-500 mt-1">Across {stats.totalFaculties} faculties</p>
+            <p className="text-xs text-gray-500 mt-1">Across {stats.totalFaculties} faculties</p>
           </CardContent>
         </Card>
 
@@ -146,7 +146,7 @@ export default async function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.totalCourses}</div>
-            <p className="text-xs text-zinc-500 mt-1">Available courses</p>
+            <p className="text-xs text-gray-500 mt-1">Available courses</p>
           </CardContent>
         </Card>
 
@@ -157,7 +157,7 @@ export default async function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.passRate.toFixed(1)}%</div>
-            <p className="text-xs text-zinc-500 mt-1">Overall performance</p>
+            <p className="text-xs text-gray-500 mt-1">Overall performance</p>
           </CardContent>
         </Card>
       </div>
@@ -174,14 +174,14 @@ export default async function AdminDashboardPage() {
           <CardContent>
             <div className="space-y-3">
               {stats.topPerformers.length === 0 ? (
-                <p className="text-sm text-zinc-500 text-center py-8">
+                <p className="text-sm text-gray-500 text-center py-8">
                   No student data available yet
                 </p>
               ) : (
                 stats.topPerformers.map(({ student, user, department, cgpa }, index) => (
                   <div
                     key={student._id.toString()}
-                    className="flex items-center justify-between p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900"
+                    className="flex items-center justify-between p-3 rounded-lg bg-gray-50"
                   >
                     <div className="flex items-center gap-3">
                       <div className="h-8 w-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white text-sm font-bold">
@@ -189,7 +189,7 @@ export default async function AdminDashboardPage() {
                       </div>
                       <div>
                         <p className="font-medium text-sm">{user?.name || 'Unknown'}</p>
-                        <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                        <p className="text-xs text-gray-600">
                           {student.matricNumber} • {department?.name || 'N/A'}
                         </p>
                       </div>
@@ -217,7 +217,7 @@ export default async function AdminDashboardPage() {
               <div className="text-5xl font-bold text-red-600 mb-2">
                 {stats.studentsOnProbation}
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm text-gray-600">
                 Students with CGPA below 2.0 need attention
               </p>
             </div>
@@ -232,7 +232,7 @@ export default async function AdminDashboardPage() {
         </CardHeader>
         <CardContent>
           {stats.recentResults.length === 0 ? (
-            <p className="text-sm text-zinc-500 text-center py-8">
+            <p className="text-sm text-gray-500 text-center py-8">
               No results recorded yet
             </p>
           ) : (
@@ -240,18 +240,18 @@ export default async function AdminDashboardPage() {
               {stats.recentResults.map((result: any) => (
                 <div
                   key={result._id.toString()}
-                  className="flex items-center justify-between p-3 rounded-lg border border-zinc-200 dark:border-zinc-800"
+                  className="flex items-center justify-between p-3 rounded-lg border border-gray-200"
                 >
                   <div>
                     <p className="font-medium text-sm">{result.student?.user?.name || 'Unknown'}</p>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                    <p className="text-xs text-gray-600">
                       {result.course?.code || 'N/A'} - {result.course?.title || 'Unknown Course'}
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <p className="text-sm font-medium">{result.score.toFixed(1)}%</p>
-                      <p className="text-xs text-zinc-500">{result.level}L S{result.semester}</p>
+                      <p className="text-xs text-gray-500">{result.level}L S{result.semester}</p>
                     </div>
                     <Badge
                       variant={

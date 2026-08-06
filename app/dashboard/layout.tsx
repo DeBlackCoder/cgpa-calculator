@@ -20,11 +20,11 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-zinc-50 dark:bg-zinc-900">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       <Sidebar role="STUDENT" />
       <div className="flex-1 flex flex-col overflow-hidden w-full lg:w-auto">
         <Header user={session.user} />
-        <main className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-900">
+        <main className="flex-1 overflow-y-auto bg-gray-50 p-6">
           {children}
         </main>
       </div>

@@ -62,7 +62,7 @@ export default async function StudentsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold mb-2">Students Management</h1>
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-gray-600">
             Manage and monitor student records
           </p>
         </div>
@@ -79,7 +79,7 @@ export default async function StudentsPage() {
         <CardContent className="p-4">
           <div className="flex gap-3">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="Search by name, matric number, or email..."
                 className="pl-10"
@@ -100,14 +100,14 @@ export default async function StudentsPage() {
         </CardHeader>
         <CardContent>
           {students.length === 0 ? (
-            <div className="text-center py-12 text-zinc-500">
+            <div className="text-center py-12 text-gray-500">
               No students registered yet
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                  <tr className="border-b border-gray-200">
                     <th className="text-left py-3 px-4 text-sm font-medium">Student</th>
                     <th className="text-left py-3 px-4 text-sm font-medium">Matric Number</th>
                     <th className="text-left py-3 px-4 text-sm font-medium">Department</th>
@@ -121,12 +121,12 @@ export default async function StudentsPage() {
                   {students.map((student: any) => (
                     <tr
                       key={student._id.toString()}
-                      className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                      className="border-b border-gray-200 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                     >
                       <td className="py-3 px-4">
                         <div>
                           <p className="font-medium">{student.user?.name || 'Unknown'}</p>
-                          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                          <p className="text-sm text-gray-600">
                             {student.user?.email || 'N/A'}
                           </p>
                         </div>
@@ -139,7 +139,7 @@ export default async function StudentsPage() {
                       <td className="py-3 px-4">
                         <div>
                           <p className="text-sm">{student.department?.name || 'N/A'}</p>
-                          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                          <p className="text-xs text-gray-600">
                             {student.faculty?.code || 'N/A'}
                           </p>
                         </div>
@@ -150,7 +150,7 @@ export default async function StudentsPage() {
                       <td className="py-3 px-4">
                         <div>
                           <p className="font-semibold">{student.cgpa.toFixed(2)}</p>
-                          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                          <p className="text-xs text-gray-600">
                             {getClassOfDegree(student.cgpa)}
                           </p>
                         </div>

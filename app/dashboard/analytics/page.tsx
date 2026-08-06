@@ -74,7 +74,7 @@ export default async function AnalyticsPage() {
         <Card>
           <CardContent className="p-12 text-center">
             <h3 className="text-xl font-semibold mb-2">No Data Available</h3>
-            <p className="text-zinc-600 dark:text-zinc-400">
+            <p className="text-gray-600">
               Add some results to see your analytics
             </p>
           </CardContent>
@@ -174,7 +174,7 @@ export default async function AnalyticsPage() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold mb-2">Academic Analytics</h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-gray-600">
           Detailed insights into your academic performance
         </p>
       </div>
@@ -190,18 +190,18 @@ export default async function AnalyticsPage() {
 
       {/* Key Metrics */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Current CGPA</CardTitle>
             <Award className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{cgpa.toFixed(2)}</div>
-            <p className="text-xs text-zinc-500 mt-1">{getClassOfDegree(cgpa)}</p>
+            <p className="text-xs text-gray-500 mt-1">{getClassOfDegree(cgpa)}</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Latest GPA</CardTitle>
             {trend > 0 ? (
@@ -209,36 +209,36 @@ export default async function AnalyticsPage() {
             ) : trend < 0 ? (
               <TrendingDown className="h-4 w-4 text-red-600" />
             ) : (
-              <TrendingUp className="h-4 w-4 text-zinc-400" />
+              <TrendingUp className="h-4 w-4 text-gray-400" />
             )}
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{latestSemester.gpa.toFixed(2)}</div>
-            <p className={`text-xs mt-1 ${trend > 0 ? "text-green-600" : trend < 0 ? "text-red-600" : "text-zinc-500"}`}>
+            <p className={`text-xs mt-1 ${trend > 0 ? "text-green-600" : trend < 0 ? "text-red-600" : "text-gray-500"}`}>
               {trend > 0 ? "+" : ""}{trend.toFixed(2)} from last semester
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{student.results.length}</div>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               {gradeDistribution.F || 0} failed
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-orange-400 bg-gradient-to-r from-orange-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Progress</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{progressPercentage.toFixed(0)}%</div>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               {creditsRemaining} credits remaining
             </p>
           </CardContent>
@@ -262,7 +262,7 @@ export default async function AnalyticsPage() {
       />
 
       {/* AI Insights */}
-      <Card className="border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+      <Card className="border-blue-200  bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
         <CardHeader>
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -273,7 +273,7 @@ export default async function AnalyticsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {aiInsights.map((insight, index) => (
-            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-zinc-900/60">
+            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
               <div className={`mt-0.5 h-2 w-2 rounded-full flex-shrink-0 ${
                 insight.type === 'success' ? 'bg-green-500' :
                 insight.type === 'warning' ? 'bg-amber-500' :
@@ -285,7 +285,7 @@ export default async function AnalyticsPage() {
               </p>
             </div>
           ))}
-          <div className="pt-2 border-t border-blue-200 dark:border-blue-800">
+          <div className="pt-2 border-t border-blue-200 ">
             <p className="text-xs text-blue-700 dark:text-blue-300 italic">
               💡 These insights are automatically generated based on your academic performance. 
               Visit the AI Advisor for personalized guidance and strategies.

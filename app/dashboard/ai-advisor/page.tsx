@@ -167,7 +167,7 @@ export default function AIAdvisorPage() {
             Powered by Gemini
           </Badge>
         </div>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-gray-600">
           Get personalized academic advice and insights powered by Grok AI
         </p>
       </div>
@@ -175,7 +175,7 @@ export default function AIAdvisorPage() {
       <div className="flex-1 grid lg:grid-cols-3 gap-6 min-h-0">
         {/* Chat Area */}
         <Card className="lg:col-span-2 flex flex-col">
-          <CardHeader className="border-b border-zinc-200 dark:border-zinc-800">
+          <CardHeader className="border-b border-gray-200">
             <div className="flex items-center justify-between">
               <CardTitle>Chat</CardTitle>
               <Badge variant="secondary">
@@ -190,11 +190,11 @@ export default function AIAdvisorPage() {
               {messages.length === 0 ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center max-w-md">
-                    <Bot className="h-16 w-16 mx-auto mb-4 text-zinc-400" />
+                    <Bot className="h-16 w-16 mx-auto mb-4 text-gray-400" />
                     <h3 className="text-lg font-semibold mb-2">
                       Welcome to AI Academic Advisor
                     </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm text-gray-600">
                       Ask me anything about your academic performance, study strategies,
                       or how to improve your grades. Try one of the suggested prompts!
                     </p>
@@ -217,8 +217,8 @@ export default function AIAdvisorPage() {
                       <div
                         className={`max-w-[80%] rounded-lg px-4 py-3 ${
                           message.role === "user"
-                            ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900"
-                            : "bg-zinc-100 dark:bg-zinc-800"
+                            ? "bg-blue-600 text-white"
+                            : "bg-gray-100 text-gray-900"
                         }`}
                       >
                         {message.role === "assistant" ? (
@@ -244,7 +244,7 @@ export default function AIAdvisorPage() {
             </div>
 
             {/* Input */}
-            <div className="border-t border-zinc-200 dark:border-zinc-800 p-4">
+            <div className="border-t border-gray-200 p-4">
               <div className="flex gap-2">
                 <Input
                   placeholder="Ask me anything about your academics..."
@@ -280,7 +280,7 @@ export default function AIAdvisorPage() {
                     key={index}
                     onClick={() => sendMessage(prompt.prompt)}
                     disabled={isLoading}
-                    className="w-full text-left p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full text-left p-3 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <div className="flex items-start gap-3">
                       <Icon className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
@@ -298,7 +298,7 @@ export default function AIAdvisorPage() {
             <CardHeader>
               <CardTitle className="text-lg">Tips</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+            <CardContent className="space-y-2 text-sm text-gray-600">
               <p>💡 Be specific about your concerns</p>
               <p>📊 I have access to your academic data</p>
               <p>🎯 Ask about goal setting and planning</p>

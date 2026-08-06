@@ -47,7 +47,7 @@ export default function SettingsPage() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-6">
+            <p className="text-gray-600 text-center mb-6">
               Only super admins can access system settings.
             </p>
             <Button onClick={() => router.push('/admin')}>
@@ -67,7 +67,7 @@ export default function SettingsPage() {
           <Settings className="h-8 w-8" />
           System Settings
         </h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="text-sm text-gray-600">
           Manage system-wide configurations and preferences
         </p>
       </div>
@@ -83,7 +83,7 @@ export default function SettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-gray-600">
               Manage faculties and their structure
             </p>
           </CardContent>
@@ -98,7 +98,7 @@ export default function SettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-gray-600">
               Manage departments under faculties
             </p>
           </CardContent>
@@ -113,7 +113,7 @@ export default function SettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-gray-600">
               Manage academic programmes
             </p>
           </CardContent>
@@ -128,7 +128,7 @@ export default function SettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-gray-600">
               Manage courses across departments
             </p>
           </CardContent>
@@ -143,7 +143,7 @@ export default function SettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-gray-600">
               Manage users and permissions
             </p>
           </CardContent>
@@ -166,21 +166,21 @@ export default function SettingsPage() {
           <CardDescription>Current system configuration</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          <div className="flex items-center justify-between py-2 border-b border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center justify-between py-2 border-b border-gray-200">
             <span className="text-sm font-medium">Database</span>
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">MongoDB</span>
+            <span className="text-sm text-gray-600">MongoDB</span>
           </div>
-          <div className="flex items-center justify-between py-2 border-b border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center justify-between py-2 border-b border-gray-200">
             <span className="text-sm font-medium">Authentication</span>
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">NextAuth.js</span>
+            <span className="text-sm text-gray-600">NextAuth.js</span>
           </div>
-          <div className="flex items-center justify-between py-2 border-b border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center justify-between py-2 border-b border-gray-200">
             <span className="text-sm font-medium">AI Provider</span>
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">Google Gemini</span>
+            <span className="text-sm text-gray-600">Google Gemini</span>
           </div>
           <div className="flex items-center justify-between py-2">
             <span className="text-sm font-medium">Framework</span>
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">Next.js 16</span>
+            <span className="text-sm text-gray-600">Next.js 16</span>
           </div>
         </CardContent>
       </Card>
@@ -202,7 +202,7 @@ export default function SettingsPage() {
             </ul>
           </div>
 
-          <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+          <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 ">
             <h4 className="font-semibold text-blue-900 dark:text-blue-400 mb-2">Regular Admin</h4>
             <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1">
               <li>• View-only access to system data</li>

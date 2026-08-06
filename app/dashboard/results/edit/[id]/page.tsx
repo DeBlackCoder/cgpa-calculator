@@ -181,7 +181,7 @@ export default function EditResultPage({ params }: { params: { id: string } }) {
           </Button>
         </Link>
         <h1 className="text-2xl sm:text-3xl font-bold">Edit Result</h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="text-sm text-gray-600">
           Update course details and score
         </p>
       </div>
@@ -299,7 +299,7 @@ export default function EditResultPage({ params }: { params: { id: string } }) {
       {/* Info Card */}
       <Card className="mt-4">
         <CardContent className="p-4">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm text-gray-600">
             <strong>Note:</strong> Changing the score will automatically recalculate the grade and grade point. 
             Your CGPA and semester GPA will be updated accordingly.
           </p>

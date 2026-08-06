@@ -270,7 +270,7 @@ export default function DepartmentsPage() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-6">
+            <p className="text-gray-600 text-center mb-6">
               Only super admins can manage departments. This ensures site-wide settings are controlled by authorized personnel only.
             </p>
             <Button onClick={() => router.push('/admin')}>
@@ -288,7 +288,7 @@ export default function DepartmentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Departments Management</h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm text-gray-600">
             Manage departments under each faculty
           </p>
         </div>
@@ -303,8 +303,8 @@ export default function DepartmentsPage() {
       {faculties.length === 0 && (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <Building2 className="h-12 w-12 text-zinc-400 mb-4" />
-            <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+            <Building2 className="h-12 w-12 text-gray-400 mb-4" />
+            <p className="text-gray-600 mb-4">
               No faculties found. Please create faculties first.
             </p>
             <Button onClick={() => window.location.href = '/admin/faculties'}>
@@ -416,7 +416,7 @@ export default function DepartmentsPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {department.description && (
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <p className="text-sm text-gray-600">
                         {department.description}
                       </p>
                     )}
@@ -473,8 +473,8 @@ export default function DepartmentsPage() {
       {departments.length === 0 && !isCreating && faculties.length > 0 && (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <Building2 className="h-12 w-12 text-zinc-400 mb-4" />
-            <p className="text-zinc-600 dark:text-zinc-400 mb-4">No departments found</p>
+            <Building2 className="h-12 w-12 text-gray-400 mb-4" />
+            <p className="text-gray-600 mb-4">No departments found</p>
             <Button onClick={() => setIsCreating(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Add Your First Department

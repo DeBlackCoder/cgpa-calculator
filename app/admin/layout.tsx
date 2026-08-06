@@ -23,7 +23,7 @@ export default async function AdminLayout({
   const adminStatus = await getAdminStatus()
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       <Sidebar 
         role="ADMIN" 
         isSuperAdmin={adminStatus.isSuperAdmin}
@@ -31,7 +31,7 @@ export default async function AdminLayout({
       />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header user={session.user} />
-        <main className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-900">
+        <main className="flex-1 overflow-y-auto bg-gray-50 p-6">
           {children}
         </main>
       </div>

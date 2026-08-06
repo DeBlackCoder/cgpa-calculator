@@ -64,7 +64,7 @@ export default async function ProfilePage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">{user?.name}</h1>
-          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm sm:text-base text-gray-600">
             {user?.email}
           </p>
         </div>
@@ -86,23 +86,23 @@ export default async function ProfilePage() {
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Full Name</p>
+            <p className="text-sm text-gray-600">Full Name</p>
             <p className="font-medium text-sm sm:text-base">{user?.name}</p>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Email Address</p>
+            <p className="text-sm text-gray-600">Email Address</p>
             <p className="font-medium text-sm sm:text-base break-all">{user?.email}</p>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Matric Number</p>
+            <p className="text-sm text-gray-600">Matric Number</p>
             <p className="font-medium">
-              <code className="bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-sm">
+              <code className="bg-gray-100 px-2 py-1 rounded text-sm text-gray-900">
                 {student.matricNumber}
               </code>
             </p>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Role</p>
+            <p className="text-sm text-gray-600">Role</p>
             <Badge variant="secondary">{user?.role}</Badge>
           </div>
         </CardContent>
@@ -118,48 +118,48 @@ export default async function ProfilePage() {
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Faculty</p>
+            <p className="text-sm text-gray-600">Faculty</p>
             <p className="font-medium text-sm sm:text-base">
               {student.faculty?.name || "Not set"}
             </p>
             {student.faculty?.code && (
-              <p className="text-xs text-zinc-500">{student.faculty.code}</p>
+              <p className="text-xs text-gray-500">{student.faculty.code}</p>
             )}
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Department</p>
+            <p className="text-sm text-gray-600">Department</p>
             <p className="font-medium text-sm sm:text-base">
               {student.department?.name || "Not set"}
             </p>
             {student.department?.code && (
-              <p className="text-xs text-zinc-500">{student.department.code}</p>
+              <p className="text-xs text-gray-500">{student.department.code}</p>
             )}
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Programme</p>
+            <p className="text-sm text-gray-600">Programme</p>
             <p className="font-medium text-sm sm:text-base">
               {student.programme?.name || "Not set"}
             </p>
             {student.programme && (
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-gray-500">
                 {student.programme.duration} years • {student.programme.totalCredits} credits
               </p>
             )}
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Current Level</p>
+            <p className="text-sm text-gray-600">Current Level</p>
             <Badge variant="secondary" className="text-base">
               {student.level || "Not set"} {student.level && "Level"}
             </Badge>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Current Semester</p>
+            <p className="text-sm text-gray-600">Current Semester</p>
             <p className="font-medium">
               {student.currentSemester ? `Semester ${student.currentSemester}` : "Not set"}
             </p>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Current Session</p>
+            <p className="text-sm text-gray-600">Current Session</p>
             <p className="font-medium">{student.currentSession || "Not set"}</p>
           </div>
         </CardContent>
@@ -175,16 +175,16 @@ export default async function ProfilePage() {
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-3">
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Admission Year</p>
+            <p className="text-sm text-gray-600">Admission Year</p>
             <p className="font-medium text-lg">{student.admissionYear || "Not set"}</p>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Credits Earned</p>
+            <p className="text-sm text-gray-600">Credits Earned</p>
             <p className="font-medium text-lg">
               {student.creditsEarned || 0} / {student.programme?.totalCredits || "—"}
             </p>
             {student.programme?.totalCredits && (
-              <div className="mt-2 h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+              <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-blue-600 transition-all"
                   style={{
@@ -199,7 +199,7 @@ export default async function ProfilePage() {
           </div>
           {student.targetCGPA && (
             <div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-1">
+              <p className="text-sm text-gray-600 flex items-center gap-1">
                 <Target className="h-4 w-4" />
                 Target CGPA
               </p>
@@ -219,7 +219,7 @@ export default async function ProfilePage() {
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Account Created</p>
+            <p className="text-sm text-gray-600">Account Created</p>
             <p className="font-medium text-sm">
               {new Date(user?.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -229,7 +229,7 @@ export default async function ProfilePage() {
             </p>
           </div>
           <div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Last Updated</p>
+            <p className="text-sm text-gray-600">Last Updated</p>
             <p className="font-medium text-sm">
               {new Date(student.updatedAt).toLocaleDateString("en-US", {
                 year: "numeric",

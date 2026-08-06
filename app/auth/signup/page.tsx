@@ -144,7 +144,7 @@ export default function SignUpPage() {
             </Button>
           </form>
           <div className="mt-6 text-center text-sm">
-            <span className="text-zinc-600 dark:text-zinc-400">Already have an account? </span>
+            <span className="text-gray-600">Already have an account? </span>
             <Link href="/auth/signin" className="font-medium hover:underline">
               Sign in
             </Link>

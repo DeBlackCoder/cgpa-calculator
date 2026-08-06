@@ -155,7 +155,7 @@ export default function CreateUserPage() {
                   <Shield className="h-4 w-4 text-amber-600" />
                   <span>Grant Super Admin privileges</span>
                 </Label>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 ml-6">
+                <p className="text-sm text-gray-600 ml-6">
                   Super Admins can create other admins and super admins.
                   Regular admins can only create student accounts.
                 </p>
@@ -174,7 +174,7 @@ export default function CreateUserPage() {
                 disabled={isLoading}
                 minLength={6}
               />
-              <p className="text-xs text-zinc-500">Minimum 6 characters</p>
+              <p className="text-xs text-gray-500">Minimum 6 characters</p>
             </div>
 
             <div className="space-y-2">
@@ -191,11 +191,11 @@ export default function CreateUserPage() {
             </div>
 
             {/* Summary */}
-            <div className="p-4 bg-zinc-50 dark:bg-zinc-900 rounded-lg space-y-2">
+            <div className="p-4 bg-gray-50 rounded-lg space-y-2">
               <h4 className="font-medium text-sm">Summary</h4>
               <div className="text-sm space-y-1">
                 <p>
-                  <span className="text-zinc-600 dark:text-zinc-400">Creating:</span>{" "}
+                  <span className="text-gray-600">Creating:</span>{" "}
                   <strong>{formData.role}</strong> account
                 </p>
                 {formData.role === "ADMIN" && formData.isSuperAdmin && (

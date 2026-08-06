@@ -59,7 +59,7 @@ export default async function ResultsPage() {
         <Card>
           <CardContent className="p-12 text-center">
             <h2 className="text-2xl font-bold mb-4">No Profile Found</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Please complete your profile first
             </p>
             <Link href="/dashboard/profile/setup">
@@ -96,7 +96,7 @@ export default async function ResultsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">My Results</h1>
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-gray-600">
             View and manage your academic results
           </p>
         </div>
@@ -119,7 +119,7 @@ export default async function ResultsPage() {
         <Card>
           <CardContent className="p-12 text-center">
             <h3 className="text-xl font-semibold mb-2">No Results Yet</h3>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Start by adding your first result
             </p>
             <Link href="/dashboard/results/add">
@@ -152,7 +152,7 @@ export default async function ResultsPage() {
                     <CardTitle>
                       {semester.level} Level - Semester {semester.semester}
                     </CardTitle>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+                    <p className="text-sm text-gray-600 mt-1">
                       {semester.results.length} courses • {totalCredits} units
                     </p>
                   </div>
@@ -160,7 +160,7 @@ export default async function ResultsPage() {
                     <div className="text-2xl font-bold">
                       {semesterGPA.toFixed(2)}
                     </div>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm text-gray-600">
                       Semester GPA
                     </p>
                   </div>
@@ -171,11 +171,11 @@ export default async function ResultsPage() {
                   {semester.results.map((result: any) => (
                     <div
                       key={result._id.toString()}
-                      className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+                      className="flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
                     >
                       <div className="flex-1">
                         <h4 className="font-medium">{result.course.title}</h4>
-                        <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
                           <span>
                             {result.course.code} • {result.creditUnits} Units
                           </span>
@@ -191,7 +191,7 @@ export default async function ResultsPage() {
                           <p className="text-sm font-medium">
                             {result.score.toFixed(1)}%
                           </p>
-                          <p className="text-xs text-zinc-500">
+                          <p className="text-xs text-gray-500">
                             {result.gradePoint.toFixed(1)} GP
                           </p>
                         </div>

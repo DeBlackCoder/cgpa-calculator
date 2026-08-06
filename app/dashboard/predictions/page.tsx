@@ -106,9 +106,9 @@ export default async function PredictionsPage() {
       <div className="p-4 sm:p-6 max-w-4xl mx-auto">
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <Brain className="h-16 w-16 text-zinc-400 mb-4" />
+            <Brain className="h-16 w-16 text-gray-400 mb-4" />
             <h2 className="text-2xl font-bold mb-2">No Data Available</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-6">
+            <p className="text-gray-600 text-center mb-6">
               Add your course results to get AI-powered predictions and recommendations.
             </p>
             <Link href="/dashboard/results/add">
@@ -152,7 +152,7 @@ export default async function PredictionsPage() {
           <Brain className="h-8 w-8" />
           AI Predictions & Recommendations
         </h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="text-sm text-gray-600">
           Data-driven insights for your academic success
         </p>
       </div>
@@ -194,21 +194,21 @@ export default async function PredictionsPage() {
         <CardContent>
           <div className="grid sm:grid-cols-3 gap-4 mb-6">
             <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20">
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Optimistic</p>
+              <p className="text-sm text-gray-600 mb-1">Optimistic</p>
               <p className="text-3xl font-bold text-green-700 dark:text-green-400">
                 {predictions.projections.optimistic.toFixed(2)}
               </p>
               <p className="text-xs mt-1">With excellent performance</p>
             </div>
             <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500">
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Realistic</p>
+              <p className="text-sm text-gray-600 mb-1">Realistic</p>
               <p className="text-3xl font-bold text-blue-700 dark:text-blue-400">
                 {predictions.projections.realistic.toFixed(2)}
               </p>
               <p className="text-xs mt-1">Based on current trend</p>
             </div>
             <div className="p-4 rounded-lg bg-orange-50 dark:bg-orange-900/20">
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Pessimistic</p>
+              <p className="text-sm text-gray-600 mb-1">Pessimistic</p>
               <p className="text-3xl font-bold text-orange-700 dark:text-orange-400">
                 {predictions.projections.pessimistic.toFixed(2)}
               </p>
@@ -242,7 +242,7 @@ export default async function PredictionsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {predictions.recommendations.map((rec, index) => (
-            <div key={index} className="border border-zinc-200 dark:border-zinc-800 rounded-lg p-4">
+            <div key={index} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
@@ -253,7 +253,7 @@ export default async function PredictionsPage() {
                       {rec.priority}
                     </Badge>
                   </div>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
+                  <p className="text-sm text-gray-600 mb-3">
                     {rec.description}
                   </p>
                   <div className="space-y-2">
@@ -305,14 +305,14 @@ export default async function PredictionsPage() {
                     )}
                     <div>
                       <p className="font-semibold">Semester {milestone.semester}</p>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <p className="text-sm text-gray-600">
                         {milestone.description}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-bold">{milestone.targetGPA.toFixed(2)}</p>
-                    <p className="text-xs text-zinc-500">Target GPA</p>
+                    <p className="text-xs text-gray-500">Target GPA</p>
                   </div>
                 </div>
               </div>

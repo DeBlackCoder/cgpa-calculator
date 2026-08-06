@@ -257,7 +257,7 @@ export default function CoursesPage() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-6">
+            <p className="text-gray-600 text-center mb-6">
               Only super admins can manage courses.
             </p>
             <Button onClick={() => router.push('/admin')}>
@@ -275,7 +275,7 @@ export default function CoursesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Courses Management</h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-sm text-gray-600">
             Manage courses across all departments
           </p>
         </div>
@@ -442,7 +442,7 @@ export default function CoursesPage() {
               </div>
               <div>
                 <h2 className="text-xl font-semibold">{level} Level</h2>
-                <p className="text-xs text-zinc-500">{levelCourses.length} courses</p>
+                <p className="text-xs text-gray-500">{levelCourses.length} courses</p>
               </div>
             </div>
             
@@ -466,15 +466,15 @@ export default function CoursesPage() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-zinc-600 dark:text-zinc-400">Credit Units:</span>
+                      <span className="text-gray-600">Credit Units:</span>
                       <span className="font-medium">{course.creditUnits}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-zinc-600 dark:text-zinc-400">Semester:</span>
+                      <span className="text-gray-600">Semester:</span>
                       <span className="font-medium">{course.semester}</span>
                     </div>
                     {course.description && (
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                      <p className="text-xs text-gray-600 line-clamp-2">
                         {course.description}
                       </p>
                     )}
@@ -507,8 +507,8 @@ export default function CoursesPage() {
       {courses.length === 0 && !isCreating && (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <BookOpen className="h-12 w-12 text-zinc-400 mb-4" />
-            <p className="text-zinc-600 dark:text-zinc-400 mb-4">No courses found</p>
+            <BookOpen className="h-12 w-12 text-gray-400 mb-4" />
+            <p className="text-gray-600 mb-4">No courses found</p>
             <Button onClick={() => setIsCreating(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Add Your First Course
