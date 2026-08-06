@@ -259,7 +259,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Academic Info */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 md:grid-cols-2">
         <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/30 to-white">
           <CardHeader>
             <CardTitle>Academic Information</CardTitle>

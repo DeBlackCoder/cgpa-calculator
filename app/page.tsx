@@ -385,7 +385,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Bento Grid */}
-          <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 auto-rows-fr">
+          <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6 auto-rows-fr">
             {/* Large Feature */}
             <BentoCard
               className="col-span-2 row-span-2 bg-gradient-to-br from-blue-50 via-blue-50 to-blue-100 border-blue-200"

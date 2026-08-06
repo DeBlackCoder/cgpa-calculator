@@ -189,7 +189,7 @@ export default async function AnalyticsPage() {
       )}
 
       {/* Key Metrics */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Current CGPA</CardTitle>
@@ -246,7 +246,7 @@ export default async function AnalyticsPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
         <GPATrendChart data={semesterData} />
         <GradeDistribution data={gradeData} />
       </div>
