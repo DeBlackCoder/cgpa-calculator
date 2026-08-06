@@ -386,9 +386,9 @@ export default function HomePage() {
 
           {/* Bento Grid */}
           <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6 auto-rows-fr">
-            {/* Large Feature */}
+            {/* Large Feature - Takes full width on mobile */}
             <BentoCard
-              className="col-span-2 row-span-2 bg-gradient-to-br from-blue-50 via-blue-50 to-blue-100 border-blue-200"
+              className="col-span-2 sm:col-span-2 lg:col-span-2 row-span-1 sm:row-span-2 bg-gradient-to-br from-blue-50 via-blue-50 to-blue-100 border-blue-200"
               icon={<Calculator className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />}
               iconBg="bg-blue-100"
               title="See how it's calculated"
@@ -396,45 +396,45 @@ export default function HomePage() {
               large
             />
 
-            {/* Tall card */}
+            {/* CGPA trends - Regular card on mobile */}
             <BentoCard
-              className="row-span-2 bg-gradient-to-br from-purple-50 via-purple-50 to-purple-100 border-purple-200"
-              icon={<Target className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />}
-              iconBg="bg-purple-100"
-              title="Target grades"
-              description="The average you need to hit your target class."
-            />
-
-            {/* Regular card */}
-            <BentoCard
-              className="bg-gradient-to-br from-green-50 via-green-50 to-green-100 border-green-200"
+              className="col-span-1 sm:col-span-1 bg-gradient-to-br from-green-50 via-green-50 to-green-100 border-green-200"
               icon={<TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />}
               iconBg="bg-green-100"
               title="CGPA trends"
               description="Track your progress over time."
             />
 
-            {/* Wide card */}
+            {/* Target grades - Regular card on mobile */}
             <BentoCard
-              className="col-span-2 sm:col-span-1 bg-gradient-to-br from-orange-50 via-orange-50 to-orange-100 border-orange-200"
+              className="col-span-1 sm:col-span-1 sm:row-span-2 lg:row-span-2 bg-gradient-to-br from-purple-50 via-purple-50 to-purple-100 border-purple-200"
+              icon={<Target className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />}
+              iconBg="bg-purple-100"
+              title="Target grades"
+              description="The average you need to hit your target class."
+            />
+
+            {/* Analytics - Regular card on mobile */}
+            <BentoCard
+              className="col-span-1 sm:col-span-1 bg-gradient-to-br from-orange-50 via-orange-50 to-orange-100 border-orange-200"
               icon={<BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600" />}
               iconBg="bg-orange-100"
               title="Analytics"
               description="Deep insights into performance."
             />
 
-            {/* Regular card */}
+            {/* Your scale - Regular card on mobile */}
             <BentoCard
-              className="bg-gradient-to-br from-pink-50 via-pink-50 to-pink-100 border-pink-200"
+              className="col-span-1 sm:col-span-1 bg-gradient-to-br from-pink-50 via-pink-50 to-pink-100 border-pink-200"
               icon={<Award className="h-5 w-5 sm:h-6 sm:w-6 text-pink-600" />}
               iconBg="bg-pink-100"
               title="Your scale"
               description="5.0 or 4.0 grading."
             />
 
-            {/* Wide card */}
+            {/* Weekly timetable - Full width on mobile */}
             <BentoCard
-              className="col-span-2 bg-gradient-to-br from-cyan-50 via-cyan-50 to-cyan-100 border-cyan-200"
+              className="col-span-2 sm:col-span-2 lg:col-span-2 bg-gradient-to-br from-cyan-50 via-cyan-50 to-cyan-100 border-cyan-200"
               icon={<Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-cyan-600" />}
               iconBg="bg-cyan-100"
               title="Weekly timetable"
@@ -792,10 +792,10 @@ function BentoCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       whileHover={{ y: -5 }}
-      className={`relative overflow-hidden bg-white p-5 sm:p-6 ${large ? 'md:p-8 lg:p-10' : 'md:p-7'} rounded-2xl border-2 hover:shadow-2xl transition-all duration-300 group ${className}`}
+      className={`relative overflow-hidden bg-white p-3 sm:p-5 md:p-6 ${large ? 'md:p-8 lg:p-10' : 'md:p-7'} rounded-2xl border-2 hover:shadow-2xl transition-all duration-300 group ${className}`}
     >
       <motion.div
-        className={`${large ? 'h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16' : 'h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12'} ${iconBg} rounded-xl flex items-center justify-center mb-4 sm:mb-5 shadow-sm group-hover:scale-110 transition-transform duration-300`}
+        className={`${large ? 'h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16' : 'h-8 w-8 sm:h-10 sm:w-10 md:h-11 md:w-11'} ${iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300`}
         whileHover={{ rotate: 360 }}
         transition={{ duration: 0.6 }}
       >
