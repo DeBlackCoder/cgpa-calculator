@@ -79,10 +79,10 @@ export function Sidebar({ role, isSuperAdmin = false, isSeniorAdmin = false }: S
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button - positioned to not overlap with header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-3 left-3 z-50 p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
         aria-label="Toggle menu"
       >
         {isOpen ? (
@@ -95,22 +95,22 @@ export function Sidebar({ role, isSuperAdmin = false, isSeniorAdmin = false }: S
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-30 backdrop-blur-sm"
+          className="lg:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <div className={cn(
-        "flex flex-col h-full w-64 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 transition-transform duration-300 ease-in-out z-40",
+        "flex flex-col h-full w-64 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 transition-transform duration-300 ease-in-out z-50",
         // Mobile: slide in from left
         "fixed lg:relative",
         isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         {/* Logo */}
-        <div className="h-16 flex items-center gap-6 px-6 border-b border-zinc-200 dark:border-zinc-800">
-          <GraduationCap className="h-6 w-6 text-blue-600" />
-          <span className="font-bold text-lg">   CGPA AI</span>
+        <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-200 dark:border-zinc-800">
+          <GraduationCap className="h-6 w-6 text-blue-600 flex-shrink-0" />
+          <span className="font-bold text-lg truncate">CGPA AI</span>
         </div>
 
         {/* Navigation */}
