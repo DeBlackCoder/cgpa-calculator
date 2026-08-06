@@ -119,71 +119,71 @@ export default async function AdminAnalyticsPage() {
         </p>
       </div>
 
-      {/* Overall Stats */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
+      {/* Overall Stats - 2 column grid */}
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Students</CardTitle>
-            <Users className="h-4 w-4 text-blue-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Students</CardTitle>
+            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{analytics.overallStats.totalStudents}</div>
-            <p className="text-xs text-gray-500 mt-1">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{analytics.overallStats.totalStudents}</div>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
               {analytics.overallStats.studentsWithResults} with results
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average CGPA</CardTitle>
-            <TrendingUp className="h-4 w-4 text-green-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Average CGPA</CardTitle>
+            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">
               {analytics.overallStats.avgCGPA.toFixed(2)}
             </div>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
               {getClassOfDegree(analytics.overallStats.avgCGPA)}
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-yellow-400 bg-gradient-to-r from-yellow-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pass Rate</CardTitle>
-            <Award className="h-4 w-4 text-yellow-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Pass Rate</CardTitle>
+            <Award className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">
               {analytics.overallStats.passRate.toFixed(1)}%
             </div>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
               Across {analytics.overallStats.totalResults} results
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-red-400 bg-gradient-to-r from-red-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">On Probation</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-red-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">On Probation</CardTitle>
+            <AlertTriangle className="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-red-600">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold text-red-600">
               {analytics.overallStats.studentsOnProbation}
             </div>
-            <p className="text-xs text-gray-500 mt-1">CGPA below 2.0</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">CGPA below 2.0</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
         {/* CGPA Distribution */}
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/30 to-white">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5" />
               CGPA Distribution
             </CardTitle>
           </CardHeader>
@@ -295,10 +295,10 @@ export default async function AdminAnalyticsPage() {
         </Card>
 
         {/* Grade Distribution */}
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/30 to-white">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Award className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+              <Award className="h-4 w-4 sm:h-5 sm:w-5" />
               Grade Distribution
             </CardTitle>
           </CardHeader>
@@ -333,9 +333,9 @@ export default async function AdminAnalyticsPage() {
       </div>
 
       {/* Department Performance */}
-      <Card>
+      <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/30 to-white">
         <CardHeader>
-          <CardTitle>Department Performance</CardTitle>
+          <CardTitle className="text-sm sm:text-base">Department Performance</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">

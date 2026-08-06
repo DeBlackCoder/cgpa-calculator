@@ -115,60 +115,60 @@ export default async function AdminDashboardPage() {
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
+      {/* Stats Grid - 2 columns */}
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Students</CardTitle>
-            <Users className="h-4 w-4 text-blue-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Students</CardTitle>
+            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{stats.totalStudents}</div>
-            <p className="text-xs text-gray-500 mt-1">Registered students</p>
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{stats.totalStudents}</div>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Registered students</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Departments</CardTitle>
-            <Building2 className="h-4 w-4 text-purple-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Departments</CardTitle>
+            <Building2 className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{stats.totalDepartments}</div>
-            <p className="text-xs text-gray-500 mt-1">Across {stats.totalFaculties} faculties</p>
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{stats.totalDepartments}</div>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Across {stats.totalFaculties} faculties</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
-            <BookOpen className="h-4 w-4 text-green-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Courses</CardTitle>
+            <BookOpen className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{stats.totalCourses}</div>
-            <p className="text-xs text-gray-500 mt-1">Available courses</p>
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{stats.totalCourses}</div>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Available courses</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-orange-400 bg-gradient-to-r from-orange-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pass Rate</CardTitle>
-            <TrendingUp className="h-4 w-4 text-orange-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium">Pass Rate</CardTitle>
+            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{stats.passRate.toFixed(1)}%</div>
-            <p className="text-xs text-gray-500 mt-1">Overall performance</p>
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{stats.passRate.toFixed(1)}%</div>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Overall performance</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
         {/* Top Performers */}
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-yellow-400 bg-gradient-to-r from-yellow-50/30 to-white">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Award className="h-5 w-5 text-yellow-600" />
-              <CardTitle>Top Performers</CardTitle>
+              <Award className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-600" />
+              <CardTitle className="text-sm sm:text-base">Top Performers</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
@@ -205,11 +205,11 @@ export default async function AdminDashboardPage() {
         </Card>
 
         {/* Students on Probation */}
-        <Card>
+        <Card className="relative overflow-hidden border-l-4 border-l-red-400 bg-gradient-to-r from-red-50/30 to-white">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-red-600" />
-              <CardTitle>Students on Probation</CardTitle>
+              <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" />
+              <CardTitle className="text-sm sm:text-base">Students on Probation</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
@@ -226,9 +226,9 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <Card>
+      <Card className="relative overflow-hidden border-l-4 border-l-cyan-400 bg-gradient-to-r from-cyan-50/30 to-white">
         <CardHeader>
-          <CardTitle>Recent Results</CardTitle>
+          <CardTitle className="text-sm sm:text-base">Recent Results</CardTitle>
         </CardHeader>
         <CardContent>
           {stats.recentResults.length === 0 ? (

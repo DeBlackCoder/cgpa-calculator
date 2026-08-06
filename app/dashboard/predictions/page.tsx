@@ -192,27 +192,27 @@ export default async function PredictionsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid sm:grid-cols-3 gap-4 mb-6">
-            <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20">
-              <p className="text-sm text-gray-600 mb-1">Optimistic</p>
-              <p className="text-3xl font-bold text-green-700 dark:text-green-400">
+          <div className="grid gap-3 sm:gap-4 grid-cols-2">
+            <div className="p-4 rounded-lg bg-gradient-to-r from-green-50/50 to-white border-l-4 border-l-green-400">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Optimistic</p>
+              <p className="text-2xl sm:text-3xl font-bold text-green-700 dark:text-green-400">
                 {predictions.projections.optimistic.toFixed(2)}
               </p>
-              <p className="text-xs mt-1">With excellent performance</p>
+              <p className="text-[10px] sm:text-xs mt-1">With excellent performance</p>
             </div>
-            <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500">
-              <p className="text-sm text-gray-600 mb-1">Realistic</p>
-              <p className="text-3xl font-bold text-blue-700 dark:text-blue-400">
+            <div className="p-4 rounded-lg bg-gradient-to-r from-blue-50/50 to-white border-l-4 border-l-blue-400 border-2">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Realistic</p>
+              <p className="text-2xl sm:text-3xl font-bold text-blue-700 dark:text-blue-400">
                 {predictions.projections.realistic.toFixed(2)}
               </p>
-              <p className="text-xs mt-1">Based on current trend</p>
+              <p className="text-[10px] sm:text-xs mt-1">Based on current trend</p>
             </div>
-            <div className="p-4 rounded-lg bg-orange-50 dark:bg-orange-900/20">
-              <p className="text-sm text-gray-600 mb-1">Pessimistic</p>
-              <p className="text-3xl font-bold text-orange-700 dark:text-orange-400">
+            <div className="p-4 rounded-lg col-span-2 bg-gradient-to-r from-orange-50/50 to-white border-l-4 border-l-orange-400">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Pessimistic</p>
+              <p className="text-2xl sm:text-3xl font-bold text-orange-700 dark:text-orange-400">
                 {predictions.projections.pessimistic.toFixed(2)}
               </p>
-              <p className="text-xs mt-1">If performance declines</p>
+              <p className="text-[10px] sm:text-xs mt-1">If performance declines</p>
             </div>
           </div>
 

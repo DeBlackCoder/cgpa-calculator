@@ -176,8 +176,8 @@ export default async function DashboardPage() {
         </Card>
       )}
 
-      {/* Stats Grid - 2 columns on mobile, 4 on desktop */}
-      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2 lg:grid-cols-4">
+      {/* Stats Grid - 2 columns consistent */}
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
         <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-xs sm:text-sm font-medium">Current CGPA</CardTitle>
@@ -242,7 +242,7 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden col-span-2 lg:col-span-4 border-l-4 border-l-orange-400 bg-gradient-to-r from-orange-50/50 to-white">
+        <Card className="relative overflow-hidden col-span-2 border-l-4 border-l-orange-400 bg-gradient-to-r from-orange-50/50 to-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-xs sm:text-sm font-medium">Target CGPA</CardTitle>
             <Target className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
@@ -258,70 +258,70 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      {/* Academic Info */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-2 md:grid-cols-2">
+      {/* Academic Info & Quick Actions - 2 column grid */}
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
         <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/30 to-white">
           <CardHeader>
-            <CardTitle>Academic Information</CardTitle>
+            <CardTitle className="text-sm sm:text-base">Academic Information</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600">Matric Number</span>
-              <span className="text-sm font-medium">{student.matricNumber}</span>
+          <CardContent className="space-y-2 sm:space-y-3">
+            <div className="flex justify-between gap-2">
+              <span className="text-xs sm:text-sm text-gray-600">Matric Number</span>
+              <span className="text-xs sm:text-sm font-medium text-right">{student.matricNumber}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600">Programme</span>
-              <span className="text-sm font-medium">{student.programme?.name ?? 'N/A'}</span>
+            <div className="flex justify-between gap-2">
+              <span className="text-xs sm:text-sm text-gray-600">Programme</span>
+              <span className="text-xs sm:text-sm font-medium text-right">{student.programme?.name ?? 'N/A'}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600">Department</span>
-              <span className="text-sm font-medium">{student.department?.name ?? 'N/A'}</span>
+            <div className="flex justify-between gap-2">
+              <span className="text-xs sm:text-sm text-gray-600">Department</span>
+              <span className="text-xs sm:text-sm font-medium text-right">{student.department?.name ?? 'N/A'}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600">Level</span>
-              <span className="text-sm font-medium">{student.level} Level</span>
+            <div className="flex justify-between gap-2">
+              <span className="text-xs sm:text-sm text-gray-600">Level</span>
+              <span className="text-xs sm:text-sm font-medium text-right">{student.level} Level</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600">Current Session</span>
-              <span className="text-sm font-medium">{student.currentSession}</span>
+            <div className="flex justify-between gap-2">
+              <span className="text-xs sm:text-sm text-gray-600">Current Session</span>
+              <span className="text-xs sm:text-sm font-medium text-right">{student.currentSession}</span>
             </div>
           </CardContent>
         </Card>
 
         <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/30 to-white">
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle className="text-sm sm:text-base">Quick Actions</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-2 sm:space-y-3">
             <Link href="/dashboard/results/add">
-              <Button className="w-full justify-between" variant="outline">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
                 Add New Result
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
             <Link href="/dashboard/analytics">
-              <Button className="w-full justify-between" variant="outline">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
                 View Analytics
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
             <Link href="/dashboard/ai-advisor">
-              <Button className="w-full justify-between" variant="outline">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
                 Ask AI Advisor
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
             <Link href="/dashboard/predictions">
-              <Button className="w-full justify-between" variant="outline">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
                 View AI Predictions
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
           </CardContent>
         </Card>
       </div>
 
-      {/* Recent Results */}
+      {/* Recent Results - Full width */}
       <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/30 to-white">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Recent Results</CardTitle>

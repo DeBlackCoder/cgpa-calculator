@@ -173,24 +173,24 @@ export default function DeadlinesPage() {
         <DeadlineDialog />
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-blue-600">{upcomingDeadlines.length}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Upcoming</div>
+      {/* Stats - 2 column grid */}
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
+          <CardContent className="p-3 sm:p-4">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">{upcomingDeadlines.length}</div>
+            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Upcoming</div>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-red-600">{overdueDeadlines.length}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Overdue</div>
+        <Card className="relative overflow-hidden border-l-4 border-l-red-400 bg-gradient-to-r from-red-50/50 to-white">
+          <CardContent className="p-3 sm:p-4">
+            <div className="text-xl sm:text-2xl font-bold text-red-600">{overdueDeadlines.length}</div>
+            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Overdue</div>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-green-600">{completedDeadlines.length}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Completed</div>
+        <Card className="relative overflow-hidden col-span-2 border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/50 to-white">
+          <CardContent className="p-3 sm:p-4">
+            <div className="text-xl sm:text-2xl font-bold text-green-600">{completedDeadlines.length}</div>
+            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Completed</div>
           </CardContent>
         </Card>
       </div>
