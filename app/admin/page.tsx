@@ -162,7 +162,8 @@ export default async function AdminDashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
+      {/* Top Performers & Students on Probation - Single column layout */}
+      <div className="grid gap-3 sm:gap-4 md:gap-6">
         {/* Top Performers */}
         <Card className="relative overflow-hidden border-l-4 border-l-yellow-400 bg-gradient-to-r from-yellow-50/30 to-white">
           <CardHeader>
