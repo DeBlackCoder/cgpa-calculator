@@ -18,6 +18,7 @@ async function makeSuperAdmin() {
       console.error('❌ User not found with email:', email)
       console.log('\nMake sure the user has signed up first!')
       process.exit(1)
+      
     }
 
     console.log('✅ User found:', user.name)

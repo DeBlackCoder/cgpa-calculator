@@ -188,65 +188,75 @@ export default async function AnalyticsPage() {
         </Card>
       )}
 
-      {/* Key Metrics */}
+      {/* Key Metrics with enhanced gradients and shadows */}
       <div className="grid gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-500 bg-gradient-to-br from-blue-50 via-blue-100 to-white shadow-lg hover:shadow-xl transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Current CGPA</CardTitle>
-            <Award className="h-4 w-4 text-blue-600" />
+            <CardTitle className="text-sm font-medium text-blue-900">Current CGPA</CardTitle>
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <Award className="h-4 w-4 text-blue-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{cgpa.toFixed(2)}</div>
-            <p className="text-xs text-gray-500 mt-1">{getClassOfDegree(cgpa)}</p>
+            <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">{cgpa.toFixed(2)}</div>
+            <p className="text-xs text-blue-700 font-medium mt-1">{getClassOfDegree(cgpa)}</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 via-green-100 to-white shadow-lg hover:shadow-xl transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Latest GPA</CardTitle>
-            {trend > 0 ? (
-              <TrendingUp className="h-4 w-4 text-green-600" />
-            ) : trend < 0 ? (
-              <TrendingDown className="h-4 w-4 text-red-600" />
-            ) : (
-              <TrendingUp className="h-4 w-4 text-gray-400" />
-            )}
+            <CardTitle className="text-sm font-medium text-green-900">Latest GPA</CardTitle>
+            <div className="p-2 bg-green-100 rounded-lg">
+              {trend > 0 ? (
+                <TrendingUp className="h-4 w-4 text-green-600" />
+              ) : trend < 0 ? (
+                <TrendingDown className="h-4 w-4 text-red-600" />
+              ) : (
+                <TrendingUp className="h-4 w-4 text-gray-400" />
+              )}
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{latestSemester.gpa.toFixed(2)}</div>
-            <p className={`text-xs mt-1 ${trend > 0 ? "text-green-600" : trend < 0 ? "text-red-600" : "text-gray-500"}`}>
-              {trend > 0 ? "+" : ""}{trend.toFixed(2)} from last semester
+            <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">{latestSemester.gpa.toFixed(2)}</div>
+            <p className={`text-xs mt-1 font-medium ${trend > 0 ? "text-green-600" : trend < 0 ? "text-red-600" : "text-gray-500"}`}>
+              {trend > 0 ? "📈 +" : trend < 0 ? "📉 " : ""}{trend.toFixed(2)} from last semester
             </p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-purple-500 bg-gradient-to-br from-purple-50 via-purple-100 to-white shadow-lg hover:shadow-xl transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
+            <CardTitle className="text-sm font-medium text-purple-900">Total Courses</CardTitle>
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <BookOpen className="h-4 w-4 text-purple-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{student.results.length}</div>
-            <p className="text-xs text-gray-500 mt-1">
+            <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">{student.results.length}</div>
+            <p className="text-xs text-purple-700 font-medium mt-1">
               {gradeDistribution.F || 0} failed
             </p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-orange-400 bg-gradient-to-r from-orange-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-orange-500 bg-gradient-to-br from-orange-50 via-orange-100 to-white shadow-lg hover:shadow-xl transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Progress</CardTitle>
+            <CardTitle className="text-sm font-medium text-orange-900">Progress</CardTitle>
+            <div className="p-2 bg-orange-100 rounded-lg">
+              <Target className="h-4 w-4 text-orange-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{progressPercentage.toFixed(0)}%</div>
-            <p className="text-xs text-gray-500 mt-1">
+            <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent">{progressPercentage.toFixed(0)}%</div>
+            <p className="text-xs text-orange-700 font-medium mt-1">
               {creditsRemaining} credits remaining
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Charts */}
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+      {/* Charts - 2 columns on all screens */}
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
         <GPATrendChart data={semesterData} />
         <GradeDistribution data={gradeData} />
       </div>
@@ -261,34 +271,37 @@ export default async function AnalyticsPage() {
         totalCredits={totalCredits}
       />
 
-      {/* AI Insights */}
-      <Card className="border-blue-200  bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+      {/* AI Insights with vibrant gradient */}
+      <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 shadow-xl">
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            <CardTitle className="text-blue-900 dark:text-blue-100">
+            <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
+              <Sparkles className="h-5 w-5 text-white" />
+            </div>
+            <CardTitle className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               AI Performance Insights
             </CardTitle>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           {aiInsights.map((insight, index) => (
-            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
-              <div className={`mt-0.5 h-2 w-2 rounded-full flex-shrink-0 ${
-                insight.type === 'success' ? 'bg-green-500' :
-                insight.type === 'warning' ? 'bg-amber-500' :
-                insight.type === 'info' ? 'bg-blue-500' :
-                'bg-red-500'
+            <div key={index} className="flex items-start gap-3 p-4 rounded-xl bg-white shadow-md hover:shadow-lg transition-shadow border-l-4 border-l-blue-400">
+              <div className={`mt-0.5 h-3 w-3 rounded-full flex-shrink-0 shadow-md ${
+                insight.type === 'success' ? 'bg-gradient-to-r from-green-400 to-green-500' :
+                insight.type === 'warning' ? 'bg-gradient-to-r from-amber-400 to-amber-500' :
+                insight.type === 'info' ? 'bg-gradient-to-r from-blue-400 to-blue-500' :
+                'bg-gradient-to-r from-red-400 to-red-500'
               }`} />
-              <p className="text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed">
+              <p className="text-sm text-gray-800 leading-relaxed font-medium">
                 {insight.message}
               </p>
             </div>
           ))}
-          <div className="pt-2 border-t border-blue-200 ">
-            <p className="text-xs text-blue-700 dark:text-blue-300 italic">
-              💡 These insights are automatically generated based on your academic performance. 
-              Visit the AI Advisor for personalized guidance and strategies.
+          <div className="pt-2 border-t-2 border-blue-100">
+            <p className="text-xs text-blue-700 italic flex items-start gap-2">
+              <span className="text-lg">💡</span>
+              <span>These insights are automatically generated based on your academic performance. 
+              Visit the AI Advisor for personalized guidance and strategies.</span>
             </p>
           </div>
         </CardContent>

@@ -176,18 +176,20 @@ export default async function DashboardPage() {
         </Card>
       )}
 
-      {/* Stats Grid - 2 columns consistent */}
+      {/* Stats Grid - 2 columns with enhanced gradients */}
       <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
-        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-blue-500 bg-gradient-to-br from-blue-50 via-blue-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs sm:text-sm font-medium">Current CGPA</CardTitle>
-            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium text-blue-900">Current CGPA</CardTitle>
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
             {cgpa !== null ? (
               <>
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold">{cgpa.toFixed(2)}</div>
-                <p className="text-[10px] sm:text-xs text-gray-500 mt-1">{classOfDegree}</p>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">{cgpa.toFixed(2)}</div>
+                <p className="text-[10px] sm:text-xs text-blue-700 font-medium mt-1">{classOfDegree}</p>
               </>
             ) : (
               <>
@@ -198,18 +200,20 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-purple-500 bg-gradient-to-br from-purple-50 via-purple-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs sm:text-sm font-medium">Predicted CGPA</CardTitle>
-            <Brain className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium text-purple-900">Predicted CGPA</CardTitle>
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <Brain className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
             {latestPrediction ? (
               <>
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
                   {latestPrediction.predictedFinalCGPA.toFixed(2)}
                 </div>
-                <p className="text-[10px] sm:text-xs text-gray-500 mt-1">AI Prediction</p>
+                <p className="text-[10px] sm:text-xs text-purple-700 font-medium mt-1">AI Prediction</p>
               </>
             ) : (
               <>
@@ -220,49 +224,60 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 via-green-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs sm:text-sm font-medium">Current GPA</CardTitle>
-            <Award className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium text-green-900">Current GPA</CardTitle>
+            <div className="p-2 bg-green-100 rounded-lg">
+              <Award className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{currentGPA.toFixed(2)}</div>
-            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">This semester</p>
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">{currentGPA.toFixed(2)}</div>
+            <p className="text-[10px] sm:text-xs text-green-700 font-medium mt-1">This semester</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-cyan-400 bg-gradient-to-r from-cyan-50/50 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-cyan-500 bg-gradient-to-br from-cyan-50 via-cyan-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs sm:text-sm font-medium">Credits Earned</CardTitle>
-            <BookOpen className="h-3 w-3 sm:h-4 sm:w-4 text-cyan-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium text-cyan-900">Credits Earned</CardTitle>
+            <div className="p-2 bg-cyan-100 rounded-lg">
+              <BookOpen className="h-3 w-3 sm:h-4 sm:w-4 text-cyan-600" />
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="text-xl sm:text-2xl md:text-3xl font-bold">{student.creditsEarned}</div>
-            <p className="text-[10px] sm:text-xs text-gray-500 mt-1 truncate">of {student.programme?.totalCredits ?? 0} required</p>
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-cyan-800 bg-clip-text text-transparent">{student.creditsEarned}</div>
+            <p className="text-[10px] sm:text-xs text-cyan-700 font-medium mt-1 truncate">of {student.programme?.totalCredits ?? 0} required</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden col-span-2 border-l-4 border-l-orange-400 bg-gradient-to-r from-orange-50/50 to-white">
+        <Card className="relative overflow-hidden col-span-2 border-l-4 border-l-orange-500 bg-gradient-to-br from-orange-50 via-orange-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs sm:text-sm font-medium">Target CGPA</CardTitle>
-            <Target className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
+            <CardTitle className="text-xs sm:text-sm font-medium text-orange-900">Target CGPA</CardTitle>
+            <div className="p-2 bg-orange-100 rounded-lg">
+              <Target className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="text-xl sm:text-2xl md:text-3xl font-bold">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent">
               {student.targetCGPA ? student.targetCGPA.toFixed(2) : "N/A"}
             </div>
-            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
-              {student.targetCGPA && cgpa && cgpa >= student.targetCGPA ? "Target achieved!" : "Keep pushing!"}
+            <p className="text-[10px] sm:text-xs text-orange-700 font-medium mt-1">
+              {student.targetCGPA && cgpa && cgpa >= student.targetCGPA ? "🎉 Target achieved!" : "Keep pushing!"}
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Academic Info & Quick Actions - 2 column grid */}
+      {/* Academic Info & Quick Actions - 2 column grid with enhanced colors */}
       <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-2">
-        <Card className="relative overflow-hidden border-l-4 border-l-blue-400 bg-gradient-to-r from-blue-50/30 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-indigo-500 bg-gradient-to-br from-indigo-50 via-indigo-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader>
-            <CardTitle className="text-sm sm:text-base">Academic Information</CardTitle>
+            <CardTitle className="text-sm sm:text-base text-indigo-900 flex items-center gap-2">
+              <div className="p-1.5 bg-indigo-100 rounded-lg">
+                <BookOpen className="h-4 w-4 text-indigo-600" />
+              </div>
+              Academic Information
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 sm:space-y-3">
             <div className="flex justify-between gap-2">
@@ -288,31 +303,36 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-l-4 border-l-purple-400 bg-gradient-to-r from-purple-50/30 to-white">
+        <Card className="relative overflow-hidden border-l-4 border-l-pink-500 bg-gradient-to-br from-pink-50 via-pink-100 to-white shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader>
-            <CardTitle className="text-sm sm:text-base">Quick Actions</CardTitle>
+            <CardTitle className="text-sm sm:text-base text-pink-900 flex items-center gap-2">
+              <div className="p-1.5 bg-pink-100 rounded-lg">
+                <Target className="h-4 w-4 text-pink-600" />
+              </div>
+              Quick Actions
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 sm:space-y-3">
             <Link href="/dashboard/results/add">
-              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9 bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white shadow-md" size="sm">
                 Add New Result
                 <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
             <Link href="/dashboard/analytics">
-              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md" size="sm">
                 View Analytics
                 <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
             <Link href="/dashboard/ai-advisor">
-              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white shadow-md" size="sm">
                 Ask AI Advisor
                 <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </Link>
             <Link href="/dashboard/predictions">
-              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9" variant="outline" size="sm">
+              <Button className="w-full justify-between text-xs sm:text-sm h-8 sm:h-9 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-md" size="sm">
                 View AI Predictions
                 <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
@@ -321,8 +341,8 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      {/* Recent Results - Full width */}
-      <Card className="relative overflow-hidden border-l-4 border-l-green-400 bg-gradient-to-r from-green-50/30 to-white">
+      {/* Recent Results - Full width with enhanced styling */}
+      <Card className="relative overflow-hidden border-l-4 border-l-emerald-500 bg-gradient-to-br from-emerald-50 via-emerald-100 to-white shadow-lg">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Recent Results</CardTitle>
           <Link href="/dashboard/results">
