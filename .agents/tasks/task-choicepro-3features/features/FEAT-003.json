@@ -1,0 +1,29 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Add carryover support to CGPA calculation: update three Mongoose models (Course, Student, Result), create lib/cgpa.ts with deduplicating calculateCGPA, update analytics page to use it for cumulative CGPA, update results API to allow carryover retakes, and add isCarryOver checkbox to the add-result form. Independent of FEAT-001 and FEAT-002.",
+  "status": "completed",
+  "steps": [
+    "models/Course.ts: Add `isCarryOver?: boolean` to ICourse interface. Add `isCarryOver: { type: Boolean, default: false }` field to CourseSchema before the closing brace of the schema fields.",
+    "models/Student.ts: Add carryOverCourses to IStudent interface: `carryOverCourses?: Array<{ courseId: string; level: number; semester: number; originalSession: string }>`. Add carryOverCourses to StudentSchema: `carryOverCourses: [{ courseId: { type: String, ref: 'Course' }, level: { type: Number }, semester: { type: Number }, originalSession: { type: String } }]`.",
+    "models/Result.ts: Add `isCarryOver?: boolean` to IResult interface. Add `isCarryOver: { type: Boolean, default: false }` to ResultSchema fields. CRITICAL: Change the unique compound index line — replace `ResultSchema.index({ studentId: 1, courseId: 1, sessionId: 1, semester: 1 }, { unique: true })` with `ResultSchema.index({ studentId: 1, courseId: 1 })` (non-unique, allows retakes in same session). Keep the other two indexes unchanged.",
+    "Create lib/cgpa.ts: Export `calculateCGPA(results: Array<{ courseId: string; gradePoint: number; creditUnits: number }>): number`. Implementation: use a Map<string, {gradePoint: number, creditUnits: number}> to deduplicate by courseId keeping the entry with the highest gradePoint. Then compute totalQualityPoints = sum of (entry.gradePoint * entry.creditUnits), totalCredits = sum of entry.creditUnits. Return totalCredits === 0 ? 0 : totalQualityPoints / totalCredits.",
+    "app/dashboard/analytics/page.tsx: Add `import { calculateCGPA } from '@/lib/cgpa'` at the top. Change the CGPA calculation (currently `calculateGPA(student.results.map(r => ({ gradePoint: r.gradePoint, creditUnits: r.creditUnits })))`) to `calculateCGPA(student.results.map(r => ({ courseId: r.courseId, gradePoint: r.gradePoint, creditUnits: r.creditUnits })))`. The per-semester GPA inside semesterData.map still uses `calculateGPA` — leave it unchanged. Keep the `import { calculateGPA, ... } from '@/lib/utils'` import since calculateGPA is still used for per-semester calculations.",
+    "app/api/results/route.ts: Add `isCarryOver: z.boolean().optional().default(false)` to resultSchema. In the POST handler duplicate check block (currently checks Result.findOne and returns 400 if found), wrap it: `if (!validatedData.isCarryOver) { const existingResult = await Result.findOne({...}); if (existingResult) { return NextResponse.json({ error: '...' }, { status: 400 }) } }`. Add `isCarryOver: validatedData.isCarryOver` to the Result.create() call.",
+    "app/dashboard/results/add/page.tsx: Add `isCarryOver: false` to the formData state object type and initial value. After the score input field, add a checkbox row: a `<div className='flex items-center gap-2'>` containing `<input id='isCarryOver' type='checkbox' checked={formData.isCarryOver} onChange={(e) => setFormData({...formData, isCarryOver: e.target.checked})} className='h-4 w-4' />` and `<Label htmlFor='isCarryOver'>This is a carryover course</Label>`. Include `isCarryOver: formData.isCarryOver` in the POST body in handleSubmit."
+  ],
+  "acceptance_criteria": [
+    "models/Course.ts, models/Student.ts, models/Result.ts compile without TypeScript errors.",
+    "models/Result.ts no longer has the `{ unique: true }` compound index on studentId+courseId+sessionId+semester.",
+    "lib/cgpa.ts exports calculateCGPA that deduplicates by courseId keeping highest gradePoint.",
+    "app/dashboard/analytics/page.tsx uses calculateCGPA for the cumulative CGPA display.",
+    "POST /api/results with isCarryOver: true skips the duplicate check and creates the result.",
+    "app/dashboard/results/add/page.tsx has an 'Is carryover' checkbox that sends isCarryOver in the request body.",
+    "npx tsc --noEmit passes with no errors."
+  ],
+  "verification": [
+    "npx tsc --noEmit"
+  ],
+  "blocked_reason": null,
+  "findings": "models/Course.ts already had isCarryOver field and interface entry before this step ran — no change needed for Step 1. All other steps implemented as specified. npx tsc --noEmit exits 0 with no errors."
+}
