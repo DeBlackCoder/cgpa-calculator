@@ -1,0 +1,26 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Upgrade admin UI: (1) fix authorization on faculties/departments/courses pages to accept any admin role (isAdmin instead of isSuperAdmin); (2) add faculty→department filter and isCarryOver checkbox to courses page; (3) fix courses API POST to allow any admin. Independent of FEAT-001 and FEAT-003.",
+  "status": "completed",
+  "steps": [
+    "In app/admin/faculties/page.tsx: In checkAuthorization(), change `if (data.isSuperAdmin)` to `if (data.isAdmin)`. Update the Access Denied message from 'Only super admins can manage faculties...' to 'You must be an admin to manage faculties.'",
+    "In app/admin/departments/page.tsx: Same auth change — `if (data.isAdmin)`. Update Access Denied message to 'You must be an admin to manage departments.'",
+    "In app/admin/courses/page.tsx — auth fix: change `if (data.isSuperAdmin)` to `if (data.isAdmin)`. Update Access Denied message to 'You must be an admin to manage courses.'",
+    "In app/admin/courses/page.tsx — add faculty/department filter: Add `Faculty` interface (fields: _id, name, code). Add state: `faculties: Faculty[]`, `selectedFacultyId: string` (default ''), `selectedDepartmentId: string` (default ''). In fetchData(), also fetch `/api/faculties` and populate `faculties` state alongside existing departments fetch. Add a filter bar above the course list: two Select components — one for faculty, one for department (filtered to selectedFacultyId's departments). When selectedDepartmentId changes, re-fetch `/api/courses?departmentId=${selectedDepartmentId}` and replace the courses state. When no department is selected, set courses to [] and show 'Select a faculty and department to view courses.' When faculty changes, reset selectedDepartmentId to '' and courses to []. The 'Add Course' button should remain visible regardless of filter state.",
+    "In app/admin/courses/page.tsx — add isCarryOver to form and Course interface: Add `isCarryOver: boolean` to the Course interface. Add `isCarryOver: false` to formData initial state and cancelEdit reset. In startEdit(), populate `isCarryOver: course.isCarryOver`. In the create/edit form, add an 'Is Carryover Course?' checkbox after the isElective selector (use a plain HTML `<input type='checkbox'>` with a `<Label>` wrapping it, or a Radix Checkbox — match whichever UI primitive is already used elsewhere in the file). In the course card display, add a 'Carryover' badge next to the existing 'Elective' badge when `course.isCarryOver` is true. Include `isCarryOver: formData.isCarryOver` in the JSON body sent to POST/PUT.",
+    "In app/api/courses/route.ts POST handler: Remove `import { canModifyAcademicData } from '@/lib/auth-helpers'` (if it is only used in POST). Add `import { getServerSession } from 'next-auth'` and `import { authOptions } from '@/lib/auth'` at the top (check if already imported — GET uses dbConnect but not session). Replace the `canModifyAcademicData()` check with: `const session = await getServerSession(authOptions); if (!session || session.user.role !== 'ADMIN') { return NextResponse.json({ error: 'Admin access required' }, { status: 403 }) }`. Move `await dbConnect()` to run after the auth check (currently it only runs when canModify passes). Also pass `isCarryOver: body.isCarryOver || false` in Course.create()."
+  ],
+  "acceptance_criteria": [
+    "Any admin (REGULAR_ADMIN, SENIOR_ADMIN, SUPER_ADMIN) can access /admin/faculties, /admin/departments, /admin/courses without getting Access Denied.",
+    "courses page shows a faculty selector and department selector; courses only load after a department is selected.",
+    "courses page create/edit form includes an isCarryOver checkbox; submitted body includes isCarryOver.",
+    "POST /api/courses succeeds for any authenticated admin (role === 'ADMIN'), not just SENIOR_ADMIN+.",
+    "npx tsc --noEmit passes with no errors."
+  ],
+  "verification": [
+    "npx tsc --noEmit"
+  ],
+  "blocked_reason": null,
+  "findings": "Added isCarryOver field to models/Course.ts (ICourse interface + CourseSchema) since the field was missing from the model — required for the feature to type-check and persist correctly. The `canModifyAcademicData` import was cleanly removed from courses/route.ts only; other API routes (faculties, departments, programmes) still use it unchanged. All acceptance criteria verified: npx tsc --noEmit exits 0."
+}
