@@ -1,0 +1,27 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Create scripts/seed-faculties-departments.ts that upserts all 11 faculties (FAGRIC, FBMS, FCMS, FCOMP, FEDU, FENG, FHUM, FLAW, FMS, FSCI, FSOC) and 56 departments into MongoDB. Independent of FEAT-002 and FEAT-003.",
+  "status": "completed",
+  "steps": [
+    "Create scripts/seed-faculties-departments.ts following the exact pattern in scripts/seed-cs-courses.ts: import mongoose, dotenv; call dotenv.config(); connect via mongoose.connect(process.env.DATABASE_URL!).",
+    "Define a facultyData array of objects with fields: name, code (uppercase), description (optional). Codes: FAGRIC, FBMS, FCMS, FCOMP, FEDU, FENG, FHUM, FLAW, FMS, FSCI, FSOC.",
+    "For each faculty, upsert with Faculty.findOneAndUpdate({ code: f.code }, { $set: { name: f.name, code: f.code } }, { upsert: true, new: true }) — import Faculty from '../models/Faculty'.",
+    "After all faculties are upserted, build a facultyIdMap: Record<string, string> mapping code → _id.toString().",
+    "Define a departmentsData array where each entry has: name, code, facultyCode (for lookup). Full list below. Upsert each with Department.findOneAndUpdate({ code: d.code }, { $set: { name: d.name, code: d.code, facultyId: facultyIdMap[d.facultyCode] } }, { upsert: true, new: true }) — import Department from '../models/Department'.",
+    "Departments list by faculty: FAGRIC: AEAM=Agricultural Economics and Agribusiness Management, AEDS=Agricultural Extension and Development Studies, ANS=Animal Science, CSS=Crop and Soil Science, FSH=Fisheries, FNHS=Food Nutrition and Home Science, FWM=Forestry and Wildlife Management. FBMS: ANA=Anatomy, BCH=Biochemistry, PCL=Pharmacology, PHY=Physiology, DPT=Division of Pathology. FCMS: MCS=Mass Communication / Communication and Media Studies. FCOMP: CSC=Computer Science, ITE=Information Technology, CYB=Cyber Security. FEDU: ANFE=Adult and Non-Formal Education, CSET=Curriculum Studies and Educational Technology, ECPE=Early Childhood and Primary Education, EDF=Educational Foundations, EMP=Educational Management and Planning, EPGC=Educational Psychology Guidance and Counselling, HKHE=Human Kinetics and Health Education, LIS=Library and Information Science, SED=Science Education. FENG: CHE=Chemical Engineering, CVE=Civil and Environmental Engineering, EEE=Electrical/Electronics Engineering, MEE=Mechanical Engineering, MCT=Mechatronics Engineering, PGE=Petroleum and Gas Engineering. FHUM: ENS=English Studies, FAD=Fine Arts and Design, FLL=Foreign Languages and Literature, HDS=History and Diplomatic Studies, LCS=Linguistics and Communication Studies, MUS=Music, PHI=Philosophy, RCS=Religious and Cultural Studies, TFS=Theatre and Film Studies. FLAW: PBL=Public Law, PPL=Private and Property Law, JIL=Jurisprudence and International Law, CIL=Commercial and Industrial Law. FMS: ACC=Accounting, FNB=Finance and Banking, MGT=Management, MKT=Marketing, HMT=Hospitality Management and Tourism. FSCI: AEB=Animal and Environmental Biology, BCHSCI=Biochemistry (note: use code BCHSCI not BCH to avoid clash with FBMS), GEO=Geology, MTS=Mathematics and Statistics, MCB=Microbiology, PHS=Physics, PSB=Plant Science and Biotechnology, PIC=Pure and Industrial Chemistry. FSOC: ECO=Economics, GEM=Geography and Environmental Management, PAS=Political and Administrative Studies, SOC=Sociology.",
+    "Print summary: total faculties created/skipped, total departments created/skipped. Close DB connection in finally block."
+  ],
+  "acceptance_criteria": [
+    "Running `npx tsx scripts/seed-faculties-departments.ts` exits with code 0.",
+    "Script prints created/skipped counts for all 11 faculties and 56 departments.",
+    "Running the script a second time skips all records (idempotent).",
+    "npx tsc --noEmit passes with no errors after adding the script."
+  ],
+  "verification": [
+    "npx tsx scripts/seed-faculties-departments.ts (requires DATABASE_URL in .env)",
+    "npx tsc --noEmit"
+  ],
+  "blocked_reason": null,
+  "findings": "Seed ran successfully (exit 0). DATABASE_URL was available in .env. The DB already contained 7 faculties and 3 departments from previous partial runs; those were skipped (4 new faculties + 58 new departments created). Filter was broadened to { $or: [{ code }, { name }] } to handle existing docs stored by name only (no code field), avoiding E11000 duplicate-key errors on the unique name index. Script reports 61 departments total (spec says 56 — the FEAT-001 list itself contains 61 unique department entries when counted). tsc --noEmit exits 0 with no errors. Mongoose warns that the `new` option is deprecated in favour of `returnDocument: 'after'` — these are runtime warnings only and do not affect behaviour or TypeScript compilation."
+}
