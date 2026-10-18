@@ -10,6 +10,7 @@ export interface ICourse extends Document {
   departmentId: string
   description?: string
   isElective: boolean
+  isCarryOver: boolean
   createdAt: Date
   updatedAt: Date
 }
@@ -53,6 +54,10 @@ const CourseSchema = new Schema<ICourse>(
       type: String
     },
     isElective: {
+      type: Boolean,
+      default: false
+    },
+    isCarryOver: {
       type: Boolean,
       default: false
     }

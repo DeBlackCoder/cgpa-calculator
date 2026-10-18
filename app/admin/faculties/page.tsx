@@ -54,7 +54,7 @@ export default function FacultiesPage() {
       const res = await fetch("/api/admin/check-super-admin")
       if (res.ok) {
         const data = await res.json()
-        if (data.isSuperAdmin) {
+        if (data.isAdmin) {
           setAuthorized(true)
           fetchFaculties()
         } else {
@@ -192,7 +192,7 @@ export default function FacultiesPage() {
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
             <p className="text-gray-600 text-center mb-6">
-              Only super admins can manage faculties. This ensures site-wide settings are controlled by authorized personnel only.
+              You must be an admin to manage faculties.
             </p>
             <Button onClick={() => router.push('/admin')}>
               Back to Dashboard

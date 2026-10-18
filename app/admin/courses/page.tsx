@@ -21,6 +21,12 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 
+interface Faculty {
+  _id: string
+  name: string
+  code: string
+}
+
 interface Department {
   _id: string
   name: string
@@ -38,12 +44,16 @@ interface Course {
   departmentId: string
   description?: string
   isElective: boolean
+  isCarryOver: boolean
   createdAt: string
 }
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([])
   const [departments, setDepartments] = useState<Department[]>([])
+  const [faculties, setFaculties] = useState<Faculty[]>([])
+  const [selectedFacultyId, setSelectedFacultyId] = useState("")
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState("")
   const [loading, setLoading] = useState(true)
   const [isCreating, setIsCreating] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -61,7 +71,8 @@ export default function CoursesPage() {
     semester: 1,
     departmentId: "",
     description: "",
-    isElective: false
+    isElective: false,
+    isCarryOver: false
   })
 
   useEffect(() => {
@@ -73,7 +84,7 @@ export default function CoursesPage() {
       const res = await fetch("/api/admin/check-super-admin")
       if (res.ok) {
         const data = await res.json()
-        if (data.isSuperAdmin) {
+        if (data.isAdmin) {
           setAuthorized(true)
           fetchData()
         } else {
@@ -92,19 +103,19 @@ export default function CoursesPage() {
 
   async function fetchData() {
     try {
-      const [coursesRes, deptsRes] = await Promise.all([
-        fetch("/api/courses"),
-        fetch("/api/departments")
+      const [deptsRes, facultiesRes] = await Promise.all([
+        fetch("/api/departments"),
+        fetch("/api/faculties")
       ])
-
-      if (coursesRes.ok) {
-        const data = await coursesRes.json()
-        setCourses(data)
-      }
 
       if (deptsRes.ok) {
         const data = await deptsRes.json()
         setDepartments(data)
+      }
+
+      if (facultiesRes.ok) {
+        const data = await facultiesRes.json()
+        setFaculties(data)
       }
     } catch (error) {
       toast({
@@ -116,6 +127,38 @@ export default function CoursesPage() {
       setLoading(false)
     }
   }
+
+  async function fetchCourses(departmentId: string) {
+    try {
+      const res = await fetch(`/api/courses?departmentId=${departmentId}`)
+      if (res.ok) {
+        const data = await res.json()
+        setCourses(data)
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to load courses",
+        variant: "destructive"
+      })
+    }
+  }
+
+  function handleFacultyChange(facultyId: string) {
+    setSelectedFacultyId(facultyId)
+    setSelectedDepartmentId("")
+    setCourses([])
+  }
+
+  function handleDepartmentChange(departmentId: string) {
+    setSelectedDepartmentId(departmentId)
+    fetchCourses(departmentId)
+  }
+
+  // Departments filtered to the selected faculty
+  const filteredDepartments = selectedFacultyId
+    ? departments.filter(d => d.facultyId === selectedFacultyId)
+    : departments
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -136,7 +179,10 @@ export default function CoursesPage() {
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          isCarryOver: formData.isCarryOver
+        })
       })
 
       if (res.ok) {
@@ -153,11 +199,15 @@ export default function CoursesPage() {
           semester: 1,
           departmentId: "",
           description: "",
-          isElective: false
+          isElective: false,
+          isCarryOver: false
         })
         setIsCreating(false)
         setEditingId(null)
-        fetchData()
+        // Refresh courses for the currently selected department
+        if (selectedDepartmentId) {
+          fetchCourses(selectedDepartmentId)
+        }
       } else {
         const data = await res.json()
         toast({
@@ -184,7 +234,9 @@ export default function CoursesPage() {
           title: "Success",
           description: "Course deleted successfully"
         })
-        fetchData()
+        if (selectedDepartmentId) {
+          fetchCourses(selectedDepartmentId)
+        }
       } else {
         const data = await res.json()
         toast({
@@ -219,7 +271,8 @@ export default function CoursesPage() {
       semester: course.semester,
       departmentId: course.departmentId,
       description: course.description || "",
-      isElective: course.isElective
+      isElective: course.isElective,
+      isCarryOver: course.isCarryOver
     })
     setEditingId(course._id)
     setIsCreating(true)
@@ -234,7 +287,8 @@ export default function CoursesPage() {
       semester: 1,
       departmentId: "",
       description: "",
-      isElective: false
+      isElective: false,
+      isCarryOver: false
     })
     setIsCreating(false)
     setEditingId(null)
@@ -258,7 +312,7 @@ export default function CoursesPage() {
             <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
             <p className="text-gray-600 text-center mb-6">
-              Only super admins can manage courses.
+              You must be an admin to manage courses.
             </p>
             <Button onClick={() => router.push('/admin')}>
               Back to Dashboard
@@ -279,13 +333,53 @@ export default function CoursesPage() {
             Manage courses across all departments
           </p>
         </div>
-        {!isCreating && (
-          <Button onClick={() => setIsCreating(true)}>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Course
-          </Button>
-        )}
+        <Button onClick={() => setIsCreating(true)} disabled={isCreating}>
+          <Plus className="h-4 w-4 mr-2" />
+          Add Course
+        </Button>
       </div>
+
+      {/* Faculty / Department filter bar */}
+      <Card>
+        <CardContent className="pt-4 pb-4">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Faculty</Label>
+              <Select value={selectedFacultyId} onValueChange={handleFacultyChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a faculty" />
+                </SelectTrigger>
+                <SelectContent>
+                  {faculties.map((faculty) => (
+                    <SelectItem key={faculty._id} value={faculty._id}>
+                      {faculty.name} ({faculty.code})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label>Department</Label>
+              <Select
+                value={selectedDepartmentId}
+                onValueChange={handleDepartmentChange}
+                disabled={!selectedFacultyId}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={selectedFacultyId ? "Select a department" : "Select a faculty first"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {filteredDepartments.map((dept) => (
+                    <SelectItem key={dept._id} value={dept._id}>
+                      {dept.name} ({dept.code})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Create/Edit Form */}
       {isCreating && (
@@ -389,6 +483,18 @@ export default function CoursesPage() {
                 </div>
               </div>
 
+              {/* isCarryOver checkbox */}
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="isCarryOver"
+                  checked={formData.isCarryOver}
+                  onChange={(e) => setFormData({ ...formData, isCarryOver: e.target.checked })}
+                  className="h-4 w-4 rounded border-gray-300"
+                />
+                <Label htmlFor="isCarryOver">Is Carryover Course?</Label>
+              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="department">Department *</Label>
                 <Select
@@ -432,89 +538,107 @@ export default function CoursesPage() {
         </Card>
       )}
 
-      {/* Courses List - Grouped by Level */}
-      {coursesByLevel.map(({ level, courses: levelCourses }) => (
-        levelCourses.length > 0 && (
-          <div key={level} className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/20">
-                <BookOpen className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold">{level} Level</h2>
-                <p className="text-xs text-gray-500">{levelCourses.length} courses</p>
-              </div>
-            </div>
-            
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {levelCourses.map((course) => (
-                <Card key={course._id.toString()}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-base">{course.title}</CardTitle>
-                        <code className="text-xs bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded inline-block mt-1">
-                          {course.code}
-                        </code>
-                      </div>
-                      {course.isElective && (
-                        <span className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 px-2 py-0.5 rounded">
-                          Elective
-                        </span>
-                      )}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600">Credit Units:</span>
-                      <span className="font-medium">{course.creditUnits}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600">Semester:</span>
-                      <span className="font-medium">{course.semester}</span>
-                    </div>
-                    {course.description && (
-                      <p className="text-xs text-gray-600 line-clamp-2">
-                        {course.description}
-                      </p>
-                    )}
-                    <div className="flex gap-2 pt-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => startEdit(course)}
-                        className="flex-1"
-                      >
-                        <Edit className="h-3 w-3 mr-1" />
-                        Edit
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => confirmDelete(course)}
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )
-      ))}
-
-      {courses.length === 0 && !isCreating && (
+      {/* Courses List — only shown when a department is selected */}
+      {!selectedDepartmentId ? (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <BookOpen className="h-12 w-12 text-gray-400 mb-4" />
-            <p className="text-gray-600 mb-4">No courses found</p>
-            <Button onClick={() => setIsCreating(true)}>
-              <Plus className="h-4 w-4 mr-2" />
-              Add Your First Course
-            </Button>
+            <p className="text-gray-600">Select a faculty and department to view courses.</p>
           </CardContent>
         </Card>
+      ) : (
+        <>
+          {coursesByLevel.map(({ level, courses: levelCourses }) => (
+            levelCourses.length > 0 && (
+              <div key={level} className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/20">
+                    <BookOpen className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold">{level} Level</h2>
+                    <p className="text-xs text-gray-500">{levelCourses.length} courses</p>
+                  </div>
+                </div>
+                
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {levelCourses.map((course) => (
+                    <Card key={course._id.toString()}>
+                      <CardHeader>
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1">
+                            <CardTitle className="text-base">{course.title}</CardTitle>
+                            <code className="text-xs bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded inline-block mt-1">
+                              {course.code}
+                            </code>
+                          </div>
+                          <div className="flex flex-col gap-1 items-end">
+                            {course.isElective && (
+                              <span className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 px-2 py-0.5 rounded">
+                                Elective
+                              </span>
+                            )}
+                            {course.isCarryOver && (
+                              <span className="text-xs bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400 px-2 py-0.5 rounded">
+                                Carryover
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-gray-600">Credit Units:</span>
+                          <span className="font-medium">{course.creditUnits}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-gray-600">Semester:</span>
+                          <span className="font-medium">{course.semester}</span>
+                        </div>
+                        {course.description && (
+                          <p className="text-xs text-gray-600 line-clamp-2">
+                            {course.description}
+                          </p>
+                        )}
+                        <div className="flex gap-2 pt-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => startEdit(course)}
+                            className="flex-1"
+                          >
+                            <Edit className="h-3 w-3 mr-1" />
+                            Edit
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => confirmDelete(course)}
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )
+          ))}
+
+          {courses.length === 0 && (
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center py-12">
+                <BookOpen className="h-12 w-12 text-gray-400 mb-4" />
+                <p className="text-gray-600 mb-4">No courses found for this department</p>
+                <Button onClick={() => setIsCreating(true)}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Your First Course
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+        </>
       )}
 
       {/* Delete Confirmation Dialog */}

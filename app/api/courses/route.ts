@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import { canModifyAcademicData } from "@/lib/auth-helpers"
 import dbConnect from "@/lib/mongodb"
 import { Course } from "@/models"
 
@@ -35,11 +34,11 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    // Check permissions - only senior admins and super admins can create courses
-    const canModify = await canModifyAcademicData()
-    if (!canModify) {
+    // Allow any authenticated admin to create courses
+    const session = await getServerSession(authOptions)
+    if (!session || session.user.role !== "ADMIN") {
       return NextResponse.json(
-        { error: "Only senior admins and super admins can create courses" },
+        { error: "Admin access required" },
         { status: 403 }
       )
     }
@@ -55,7 +54,8 @@ export async function POST(request: NextRequest) {
       semester: body.semester,
       departmentId: body.departmentId,
       description: body.description,
-      isElective: body.isElective || false
+      isElective: body.isElective || false,
+      isCarryOver: body.isCarryOver || false
     })
 
     return NextResponse.json(course, { status: 201 })
