@@ -38,8 +38,82 @@ export async function GET(
 }
 
 /**
+ * PUT /api/courses/[id]
+ * Full update of a course (admin only) — used by the admin courses management page.
+ */
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    await dbConnect()
+    const session = await getServerSession(authOptions)
+
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Admin access required" }, { status: 403 })
+    }
+
+    const { id } = await params
+    const course = await Course.findById(id)
+
+    if (!course) {
+      return NextResponse.json({ error: "Course not found" }, { status: 404 })
+    }
+
+    const body = await request.json()
+    const { code, title, creditUnits, level, semester, departmentId, description, isElective, isCarryOver } = body
+
+    if (!code || !title || !creditUnits || !level || !semester || !departmentId) {
+      return NextResponse.json(
+        { error: "code, title, creditUnits, level, semester, and departmentId are required" },
+        { status: 400 }
+      )
+    }
+
+    if (creditUnits < 1 || creditUnits > 6) {
+      return NextResponse.json(
+        { error: "Credit units must be between 1 and 6" },
+        { status: 400 }
+      )
+    }
+
+    const updatedCourse = await Course.findByIdAndUpdate(
+      id,
+      {
+        code: code.toUpperCase().trim(),
+        title,
+        creditUnits,
+        level,
+        semester,
+        departmentId,
+        description: description || "",
+        isElective: isElective ?? false,
+        isCarryOver: isCarryOver ?? false,
+      },
+      { new: true, runValidators: true }
+    ).lean()
+
+    return NextResponse.json(updatedCourse)
+  } catch (error: any) {
+    console.error("Course PUT update error:", error)
+
+    if (error.code === 11000) {
+      return NextResponse.json(
+        { error: "Course code already exists" },
+        { status: 400 }
+      )
+    }
+
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    )
+  }
+}
+
+/**
  * PATCH /api/courses/[id]
- * Update course details (only code, title, creditUnits can be updated by students for their results)
+ * Partial update of a course (only code, title, creditUnits can be changed by non-admin callers).
  */
 export async function PATCH(
   request: NextRequest,
