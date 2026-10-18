@@ -12,6 +12,7 @@ export interface IResult extends Document {
   gradePoint: number
   creditUnits: number
   qualityPoints: number
+  isCarryOver?: boolean
   createdAt: Date
   updatedAt: Date
 }
@@ -69,6 +70,10 @@ const ResultSchema = new Schema<IResult>(
       type: Number,
       required: true,
       min: 0
+    },
+    isCarryOver: {
+      type: Boolean,
+      default: false
     }
   },
   {
@@ -77,7 +82,7 @@ const ResultSchema = new Schema<IResult>(
 )
 
 // Compound indexes
-ResultSchema.index({ studentId: 1, courseId: 1, sessionId: 1, semester: 1 }, { unique: true })
+ResultSchema.index({ studentId: 1, courseId: 1 })
 ResultSchema.index({ studentId: 1, level: 1, semester: 1 })
 ResultSchema.index({ studentId: 1 })
 

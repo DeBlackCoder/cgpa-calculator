@@ -23,7 +23,8 @@ export default function AddResultPage() {
     sessionId: "",
     semester: "",
     level: "",
-    score: ""
+    score: "",
+    isCarryOver: false
   })
 
   useEffect(() => {
@@ -110,7 +111,8 @@ export default function AddResultPage() {
           sessionId: formData.sessionId,
           semester: parseInt(formData.semester),
           level: parseInt(formData.level),
-          score
+          score,
+          isCarryOver: formData.isCarryOver
         })
       })
 
@@ -258,6 +260,17 @@ export default function AddResultPage() {
                 onChange={(e) => setFormData({ ...formData, score: e.target.value })}
                 required
               />
+            </div>
+
+            <div className="flex items-center gap-2">
+              <input
+                id="isCarryOver"
+                type="checkbox"
+                checked={formData.isCarryOver}
+                onChange={(e) => setFormData({ ...formData, isCarryOver: e.target.checked })}
+                className="h-4 w-4"
+              />
+              <Label htmlFor="isCarryOver">This is a carryover course</Label>
             </div>
 
             {/* Preview */}

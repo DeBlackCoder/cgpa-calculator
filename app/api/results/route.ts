@@ -11,7 +11,8 @@ const resultSchema = z.object({
   sessionId: z.string().min(1, "Session is required"),
   semester: z.number().min(1).max(2),
   level: z.number().min(100).max(900),
-  score: z.number().min(0).max(100)
+  score: z.number().min(0).max(100),
+  isCarryOver: z.boolean().optional().default(false)
 })
 
 export async function GET(request: NextRequest) {
@@ -104,19 +105,21 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const validatedData = resultSchema.parse(body)
 
-    // Check if result already exists
-    const existingResult = await Result.findOne({
-      studentId: student._id.toString(),
-      courseId: validatedData.courseId,
-      sessionId: validatedData.sessionId,
-      semester: validatedData.semester
-    })
+    // Check if result already exists (skip check for carryover retakes)
+    if (!validatedData.isCarryOver) {
+      const existingResult = await Result.findOne({
+        studentId: student._id.toString(),
+        courseId: validatedData.courseId,
+        sessionId: validatedData.sessionId,
+        semester: validatedData.semester
+      })
 
-    if (existingResult) {
-      return NextResponse.json(
-        { error: "Result already exists for this course in this semester" },
-        { status: 400 }
-      )
+      if (existingResult) {
+        return NextResponse.json(
+          { error: "Result already exists for this course in this semester" },
+          { status: 400 }
+        )
+      }
     }
 
     // Get course details
@@ -144,7 +147,8 @@ export async function POST(request: NextRequest) {
       grade: grade as 'A' | 'B' | 'C' | 'D' | 'E' | 'F',
       gradePoint,
       creditUnits: course.creditUnits,
-      qualityPoints
+      qualityPoints,
+      isCarryOver: validatedData.isCarryOver
     })
 
     // Manually fetch relations

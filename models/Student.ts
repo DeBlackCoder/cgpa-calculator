@@ -13,6 +13,7 @@ export interface IStudent extends Document {
   admissionYear: number
   targetCGPA?: number
   creditsEarned: number
+  carryOverCourses?: Array<{ courseId: string; level: number; semester: number; originalSession: string }>
   createdAt: Date
   updatedAt: Date
 }
@@ -76,7 +77,15 @@ const StudentSchema = new Schema<IStudent>(
       type: Number,
       default: 0,
       min: 0
-    }
+    },
+    carryOverCourses: [
+      {
+        courseId: { type: String, ref: 'Course' },
+        level: { type: Number },
+        semester: { type: Number },
+        originalSession: { type: String }
+      }
+    ]
   },
   {
     timestamps: true

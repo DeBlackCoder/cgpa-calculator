@@ -9,6 +9,7 @@ import Programme from "@/models/Programme"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { TrendingUp, TrendingDown, Award, AlertTriangle, Sparkles, BookOpen, Target } from "lucide-react"
 import { calculateGPA, getClassOfDegree } from "@/lib/utils"
+import { calculateCGPA } from "@/lib/cgpa"
 import GPATrendChart from "@/components/analytics/gpa-trend-chart"
 import GradeDistribution from "@/components/analytics/grade-distribution"
 import PerformanceSummary from "@/components/analytics/performance-summary"
@@ -84,8 +85,9 @@ export default async function AnalyticsPage() {
   }
 
   // Calculate CGPA
-  const cgpa = calculateGPA(
+  const cgpa = calculateCGPA(
     student.results.map((r) => ({
+      courseId: r.courseId,
       gradePoint: r.gradePoint,
       creditUnits: r.creditUnits
     }))
