@@ -82,6 +82,15 @@ const ResultSchema = new Schema<IResult>(
 )
 
 // Compound indexes
+// Unique guard for non-carryover results — prevents duplicate submissions on network retries
+ResultSchema.index(
+  { studentId: 1, courseId: 1, sessionId: 1, semester: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { isCarryOver: { $ne: true } }
+  }
+)
+// General lookup indexes
 ResultSchema.index({ studentId: 1, courseId: 1 })
 ResultSchema.index({ studentId: 1, level: 1, semester: 1 })
 ResultSchema.index({ studentId: 1 })

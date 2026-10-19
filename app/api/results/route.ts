@@ -105,8 +105,22 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const validatedData = resultSchema.parse(body)
 
-    // Check if result already exists (skip check for carryover retakes)
-    if (!validatedData.isCarryOver) {
+    if (validatedData.isCarryOver) {
+      // For carryover results, require an existing failing result for this course
+      const failingResult = await Result.findOne({
+        studentId: student._id.toString(),
+        courseId: validatedData.courseId,
+        grade: 'F'
+      })
+
+      if (!failingResult) {
+        return NextResponse.json(
+          { error: "Carryover result requires an existing failing result for this course" },
+          { status: 400 }
+        )
+      }
+    } else {
+      // For normal results, prevent duplicates within the same session/semester
       const existingResult = await Result.findOne({
         studentId: student._id.toString(),
         courseId: validatedData.courseId,
@@ -150,6 +164,20 @@ export async function POST(request: NextRequest) {
       qualityPoints,
       isCarryOver: validatedData.isCarryOver
     })
+
+    // Track carryover in student record so the carryOverCourses list stays current
+    if (validatedData.isCarryOver) {
+      await Student.findByIdAndUpdate(student._id, {
+        $addToSet: {
+          carryOverCourses: {
+            courseId: validatedData.courseId,
+            level: validatedData.level,
+            semester: validatedData.semester,
+            originalSession: validatedData.sessionId
+          }
+        }
+      })
+    }
 
     // Manually fetch relations
     const [courseData, sessionData] = await Promise.all([
