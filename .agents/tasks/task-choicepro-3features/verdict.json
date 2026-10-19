@@ -1,0 +1,10 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    "Profile edit files not committed — app/dashboard/profile/edit/page.tsx, app/api/user/profile/route.ts, and the modified app/api/student/profile/route.ts are all untracked/unstaged. These must be committed before the profile-edit feature can ship.",
+    "Unique index removed with no replacement guard — ResultSchema's unique compound index (studentId + courseId + sessionId + semester) was dropped entirely. Without it, network retries can silently create duplicate non-carryover results; restore a unique index for non-carryover entries or add a concurrent-safe server-side check.",
+    "isCarryOver is fully client-controlled — the duplicate-check bypass is gated solely on the request body flag, so any client can skip the duplicate guard by sending isCarryOver: true. Validate against the student's registered carryOverCourses or at minimum require an existing failing result for that courseId before permitting a carryover insert.",
+    "Student.carryOverCourses is a dead field — modelled but never written to or read from in this diff. Either wire it into the carryover result-entry flow or remove it to prevent schema drift."
+  ],
+  "reviewDoc": ".agents/tasks/task-choicepro-3features/2026-10-18-172019-review.md"
+}

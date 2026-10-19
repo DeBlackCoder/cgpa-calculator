@@ -1,0 +1,7 @@
+{
+  "task_id": "task-choicepro-3features",
+  "task_description": "Add seed data for 11 faculties and 56 departments; upgrade admin UI to allow any admin role and add faculty/department filtering + isCarryOver to courses; support carryover courses in CGPA calculation with model changes, new lib/cgpa.ts, and UI updates.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}
